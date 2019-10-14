@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-US" class="  ext-strict">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./index_files/style.css">
+
+</head>
+
+<body class=" ext-webkit ext-chrome" id="syno-nsc-ext-gen3">
+
+<header>
+  <div class="container">
+    <h1>ng-address-data-gouv</h1>
+    <h2>Composant web de recherche d'adresses au travers d'un système d'autocomplétion et d'utilisation du service
+      officiel geo.api.gouv.fr</h2>
+
+    <section id="downloads">
+
+      <a href="https://github.com/Rebolon/ng-address-data-gouv" class="btn btn-github"><span class="icon"></span>View on
+        GitHub</a>
+    </section>
+  </div>
+</header>
+
+<div class="container">
+  <section id="main_content">
+    <h1 id="ngaddressdatagouv">NgAddressDataGouv</h1>
+
+    <p>The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of
+      https://geo.api.gouv.fr
+      With this component you can fill an french address that will be validated against official geo.api.gouv.fr.</p>
+
+    <p>You may also import the AppModule to use the component inside your angular project.</p>
+
+    <h2 id="demo">Demo</h2>
+
+    <p>
+      <app-search-address [label]="Just fill the inpu with a french postal address" (addressFound)="console.log($event)"
+                          width="500"></app-search-address>
+    </p>
+
+    <h2 id="usage">Usage</h2>
+
+    <p>You only need to require the javascript files in your html template like this:</p>
+
+    <div class="highlighter-rouge">
+      <div class="highlight"><pre class="highlight"><code>&lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es2015.js" type="module"&gt;&lt;/script&gt;
+&lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es5.js" nomodule&gt;&lt;/script&gt;
+</code></pre>
+      </div>
+    </div>
+
+    <p>And then you can use the custom elements everyywhere like this:</p>
+
+    <div class="highlighter-rouge">
+      <div class="highlight"><pre class="highlight"><code>&lt;app-search-address&gt;&lt;/app-search-address&gt;
+</code></pre>
+      </div>
+    </div>
+
+    <h3 id="parameters">Parameters</h3>
+
+    <ul>
+      <li>loaderSize: in px, default is 15</li>
+      <li>width: of the input field, in px, default is 250</li>
+      <li>placeholder: of the input, default is empty</li>
+      <li>label: of the input, default is empty</li>
+      <li>id: of the input if you need one, default is like this ‘ri-address-search-component-‘ + (new
+        Date()).getTime();
+      </li>
+      <li>uri: of the API in case you host your own server (cloned from https://github.com/etalab), default is the
+        official uri https://api-adresse.data.gouv.fr
+      </li>
+    </ul>
+
+    <h3 id="output">Output</h3>
+
+    <ul>
+      <li>addressFound: the full address retreived from API with coordinates</li>
+    </ul>
+
+    <h3 id="sample">Sample</h3>
+
+    <div class="highlighter-rouge">
+      <div class="highlight"><pre class="highlight"><code>&lt;app-search-address (addressFound)="console.log($event)" width="500"&gt;&lt;/app-search-address&gt;
+</code></pre>
+      </div>
+    </div>
+
+    <h3 id="extra-infos">Extra infos</h3>
+
+    <p>In fact you should never keep node_modules in production, but you should move dist files in your app using
+      Webpack, or your Continous Integration with your pipelines.</p>
+
+    <p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 8.0.6.
+    </p>
+
+    <h2 id="development-server">Development server</h2>
+
+    <p>Run <code class="highlighter-rouge">npm start</code> for a dev server. Navigate to <code
+      class="highlighter-rouge">http://localhost:4200/</code>. The app will automatically reload if you change any of
+      the source files.</p>
+
+    <p>This is the debug mode, a bit like a StoryBook project where the component AddressSearchComponent is built like a
+      full angular component</p>
+
+    <h2 id="build">Build</h2>
+
+    <p>Run <code class="highlighter-rouge">npm run build</code> to build the project as a custom element.</p>
+
+    <h2 id="running-unit-tests">Running unit tests</h2>
+
+    <p>Run <code class="highlighter-rouge">ng test</code> to execute the unit tests via <a
+      href="https://karma-runner.github.io/">Karma</a>.</p>
+
+    <h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
+
+    <p>Run <code class="highlighter-rouge">ng e2e</code> to execute the end-to-end tests via <a
+      href="http://www.protractortest.org/">Protractor</a>.</p>
+
+    <h2 id="further-help">Further help</h2>
+
+    <p>You can add issues or do some PR to improve this package !</p>
+
+  </section>
+</div>
+
+<div id="syno-nsc-ext-comp-1008" class=" x-tip-invalid"
+     style="position: absolute; z-index: 11000; visibility: hidden; display: none;">
+  <div class="x-tip-invalid-tl">
+    <div class="x-tip-invalid-tr">
+      <div class="x-tip-invalid-tc">
+        <div class="x-tip-invalid-header x-unselectable" id="syno-nsc-ext-gen4"><span
+          class="x-tip-invalid-header-text"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="x-tip-invalid-bwrap" id="syno-nsc-ext-gen5">
+    <div class="x-tip-invalid-ml">
+      <div class="x-tip-invalid-mr">
+        <div class="x-tip-invalid-mc" id="syno-nsc-ext-gen8">
+          <div class="x-tip-invalid-body" id="syno-nsc-ext-gen6" style="height: auto;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="x-tip-invalid-bl x-panel-nofooter" id="syno-nsc-ext-gen7">
+      <div class="x-tip-invalid-br">
+        <div class="x-tip-invalid-bc"></div>
+      </div>
+    </div>
+  </div>
+  <div class="x-tip-anchor x-tip-anchor-top" id="syno-nsc-ext-gen9" style="z-index: 11001;"></div>
+</div>
+
+<script type="module"
+        src="https://raw.githubusercontent.com/Rebolon/ng-address-data-gouv/master/dist/custom-element/output-es2015.js"></script>
+<script nomodule
+        src="https://raw.githubusercontent.com/Rebolon/ng-address-data-gouv/master/dist/custom-element/output-es5.js"></script>
+
+</body>
+</html>
