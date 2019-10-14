@@ -9,8 +9,8 @@
     "lint": "node_modules/.bin/ng lint",
     "e2e": "node_modules/.bin/ng e2e",
     "bc": "npm run build && npm run concat",
-    "concat:es5": "concat -o dist/custom-element/output-es5.js dist/custom-element/runtime-es5.js dist/custom-element/polyfills-es5.js dist/custom-element/scripts.js dist/custom-element/main-es5.js",
-    "concat:es2015": "concat -o dist/custom-element/output-es2015.js dist/custom-element/runtime-es2015.js dist/custom-element/polyfills-es2015.js dist/custom-element/scripts.js dist/custom-element/main-es2015.js",
+    "concat:es5": "node_modules/.bin/concat -o dist/custom-element/output-es5.js dist/custom-element/runtime-es5.js dist/custom-element/polyfills-es5.js dist/custom-element/main-es5.js",
+    "concat:es2015": "node_modules/.bin/concat -o dist/custom-element/output-es2015.js dist/custom-element/runtime-es2015.js dist/custom-element/polyfills-es2015.js dist/custom-element/main-es2015.js",
     "concat": "npm run concat:es5 && npm run concat:es2015"
   },
   "private": true,
