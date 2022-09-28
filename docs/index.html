@@ -23,11 +23,9 @@
 <header>
   <div class="container">
     <h1>ng-address-data-gouv</h1>
-    <h2>Composant web de recherche d'adresses au travers d'un système d'autocomplétion et d'utilisation du service
-      officiel geo.api.gouv.fr</h2>
+    <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : geo.api.gouv.fr</h2>
 
     <section id="downloads">
-
       <a href="https://github.com/Rebolon/ng-address-data-gouv" class="btn btn-github"><span class="icon"></span>View on
         GitHub</a>
     </section>
@@ -54,17 +52,25 @@
     <p>You only need to require the javascript files in your html template like this:</p>
 
     <div class="highlighter-rouge">
-      <div class="highlight"><pre class="highlight"><code>&lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es2015.js" type="module"&gt;&lt;/script&gt;
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            &lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es2015.js" type="module"&gt;&lt;/script&gt;
 &lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es5.js" nomodule&gt;&lt;/script&gt;
-</code></pre>
+          </code>
+        </pre>
       </div>
     </div>
 
-    <p>And then you can use the custom elements everyywhere like this:</p>
+    <p>And then you can use the custom elements everywhere like this:</p>
 
     <div class="highlighter-rouge">
-      <div class="highlight"><pre class="highlight"><code>&lt;app-search-address&gt;&lt;/app-search-address&gt;
-</code></pre>
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            &lt;app-search-address&gt;&lt;/app-search-address&gt;
+          </code>
+        </pre>
       </div>
     </div>
 
@@ -86,14 +92,18 @@
     <h3 id="output">Output</h3>
 
     <ul>
-      <li>addressFound: the full address retreived from API with coordinates</li>
+      <li>addressFound: the full address retrieved from API with coordinates</li>
     </ul>
 
     <h3 id="sample">Sample</h3>
 
     <div class="highlighter-rouge">
-      <div class="highlight"><pre class="highlight"><code>&lt;app-search-address (addressFound)="console.log($event)" width="500"&gt;&lt;/app-search-address&gt;
-</code></pre>
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            &lt;app-search-address (addressFound)="console.log($event)" width="500"&gt;&lt;/app-search-address&gt;
+          </code>
+        </pre>
       </div>
     </div>
 
@@ -162,9 +172,14 @@
   <div class="x-tip-anchor x-tip-anchor-top" id="syno-nsc-ext-gen9" style="z-index: 11001;"></div>
 </div>
 
+<!-- Load both javascript files to be able to use the web-component -->
 <script src="js/output-es2015.js" type="module"></script>
 <script src="js/output-es5.js" nomodule></script>
 <script>
+    /*
+    * This is a sample on how to listen on app-search-address
+    * event when an address is selected by a user
+    */
     const el = document.querySelector('app-search-address');
     el.addEventListener('addressFound', (event) => {
         let res = event.detail

@@ -45,6 +45,11 @@ In fact you should never keep node_modules in production, but you should move di
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
 
+## Build
+
+To build a new version, just run `npm run build`
+It will build a new version available in *docs* folder
+
 ## Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

@@ -5,13 +5,18 @@
     "ng": "node_modules/.bin/ng",
     "start": "node_modules/.bin/ng serve",
     "build": "node_modules/.bin/ng build --prod --output-hashing=none --project standalone",
+    "build-w": "node_modules\\.bin\\ng build --prod --output-hashing=none --project standalone",
     "test": "node_modules/.bin/ng test",
     "lint": "node_modules/.bin/ng lint",
     "e2e": "node_modules/.bin/ng e2e",
     "bc": "npm run build && npm run concat",
+    "bc-w": "npm run build-w && npm run concat-w",
     "concat:es5": "node_modules/.bin/concat -o dist/custom-element/output-es5.js dist/custom-element/runtime-es5.js dist/custom-element/polyfills-es5.js dist/custom-element/main-es5.js",
+    "concat-w:es5": "node_modules\\.bin\\concat -o dist/custom-element/output-es5.js dist/custom-element/runtime-es5.js dist/custom-element/polyfills-es5.js dist/custom-element/main-es5.js",
     "concat:es2015": "node_modules/.bin/concat -o dist/custom-element/output-es2015.js dist/custom-element/runtime-es2015.js dist/custom-element/polyfills-es2015.js dist/custom-element/main-es2015.js",
-    "concat": "npm run concat:es5 && npm run concat:es2015"
+    "concat-w:es2015": "node_modules\\.bin\\concat -o dist/custom-element/output-es2015.js dist/custom-element/runtime-es2015.js dist/custom-element/polyfills-es2015.js dist/custom-element/main-es2015.js",
+    "concat": "npm run concat:es5 && npm run concat:es2015",
+    "concat-w": "npm run concat-w:es5 && npm run concat-w:es2015"
   },
   "private": true,
   "dependencies": {
