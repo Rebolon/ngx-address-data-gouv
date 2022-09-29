@@ -76,7 +76,7 @@ class AddressSearchComponent {
         this.id = 'ri-address-search-component-' + (new Date()).getTime();
         this.uri = '';
         this.isLoading = new ReplaySubject(1);
-        this.addressFound = this.selectedAddress$.asObservable();
+        this.addressFound = this.selectedAddress$.asObservable().pipe(filter((value) => value && typeof value === 'object' && value.constructor.name === 'AddressAPIResult'));
         // Memory leak prevention
         this.ngUnsubscribe = new Subject();
     }
@@ -85,8 +85,9 @@ class AddressSearchComponent {
             this.service.uri = this.uri;
         }
         this.isLoading.next(false);
-        this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => this.isLoading.next(true));
-        this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe), debounceTime(1000), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
+        this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe), debounceTime(250), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
+            || value !== this.selectedAddress$.getValue().properties.label)).subscribe(() => this.isLoading.next(true));
+        this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe), debounceTime(750), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
             || value !== this.selectedAddress$.getValue().properties.label), switchMap((data) => this.service.search(data))).subscribe((data) => {
             this.listAddresses$.next(data);
             this.isLoading.next(false);

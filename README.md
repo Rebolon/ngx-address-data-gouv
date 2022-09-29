@@ -8,6 +8,8 @@ You may also import the library to use the component inside your angular project
 
 ## Usage
 
+`npm install @rebolon/ng-address-data-gouv`
+
 ### All application
 
 You only need to require the javascript files in your html template like this:
@@ -34,6 +36,7 @@ And then you can use the custom elements everywhere like this:
 ### Output
 
 * addressFound: the full address retrieved from API with coordinates
+* isLoading: true/false while the http call is pending
 
 ### Sample
 

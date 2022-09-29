@@ -78,7 +78,9 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
   @Input() id = 'ri-address-search-component-' + (new Date()).getTime();
   @Input() uri: string = '';
   @Output() isLoading: ReplaySubject<boolean> = new ReplaySubject(1);
-  @Output() addressFound: Observable<AddressAPIResult> = this.selectedAddress$.asObservable();
+  @Output() addressFound: Observable<AddressAPIResult> = this.selectedAddress$.asObservable().pipe(
+    filter((value: any) => value && typeof value === 'object' && value.constructor.name === 'AddressAPIResult')
+  );
 
   // Memory leak prevention
   protected ngUnsubscribe: Subject<void> = new Subject();
@@ -93,14 +95,20 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
     this.isLoading.next(false);
 
     this.inputValue.asObservable().pipe(
-      takeUntil(this.ngUnsubscribe)
+      takeUntil(this.ngUnsubscribe),
+      debounceTime(250),
+      filter((value: string) => value.trim().length > 3),
+      filter((value: string) =>
+        !this.selectedAddress$.getValue().properties
+        || value !== this.selectedAddress$.getValue().properties.label
+      ),
     ).subscribe(
       () => this.isLoading.next(true)
     );
 
     this.inputValue.asObservable().pipe(
       takeUntil(this.ngUnsubscribe),
-      debounceTime(1000),
+      debounceTime(750),
       filter((value: string) => value.trim().length > 3),
       filter((value: string) =>
         !this.selectedAddress$.getValue().properties
