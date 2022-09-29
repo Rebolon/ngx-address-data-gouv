@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/page.css">
   <link rel="stylesheet" href="assets/css/output.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
   <style>
     ul > li {
       color: black;
@@ -41,6 +42,12 @@
       With this component you can fill an french address that will be validated against official https://adresse.data.gouv.fr/api-doc</p>
 
     <p>You may also import the StandaloneModule to use the component inside your angular project.</p>
+
+    <h2>Installation</h2>
+
+    <p>
+      `npm install @rebolon/ng-address-data-gouv`
+    </p>
 
     <h2 id="demo">Demo</h2>
 
@@ -92,6 +99,7 @@
 
     <ul>
       <li>addressFound: the full address retrieved from API with coordinates</li>
+      <li>isLoading: true/false while the http call is pending</li>
     </ul>
 
     <h3 id="sample">Sample</h3>
@@ -171,15 +179,18 @@
   <div class="x-tip-anchor x-tip-anchor-top" id="syno-nsc-ext-gen9" style="z-index: 11001;"></div>
 </div>
 
-<script src="/output.js" type="module"></script>
+<script src="/assets/js/output.js" type="module"></script>
 <script>
   /*
-  * This is a sample on how to listen on app-search-address
+  * This is a sample on how to listen on ng-address-data-gouv-search
   * event when an address is selected by a user
   */
-  const el = document.querySelector('app-search-address');
+  const el = document.querySelector('ng-address-data-gouv-search');
   el.addEventListener('addressFound', (event) => {
     let res = event.detail
+    if (!res.hasOwnProperty('properties')) {
+      return
+    }
     let address = res.properties
     let coordinates = res.geometry.coordinates
     let debugResult = document.querySelector('#search-output')
@@ -194,6 +205,18 @@
           ${coordinates ? '  lat: ' + coordinates[0] : 'no latitude'}
           ${coordinates ? '  long: ' + coordinates[1] : 'no longitude'}
         `
+  });
+  el.addEventListener('isLoading', (event) => {
+    let isLoading = event.detail
+    let pendingMessage = "HTTP call to api is pending..."
+    let debugResult = document.querySelector('#search-output')
+    if (isLoading === true) {
+      debugResult.innerHTML = `
+          HTTP call to api is pending...
+        `
+    } else if (debugResult.innerText.trim() === pendingMessage) {
+      debugResult.innerHTML = ''
+    }
   });
 </script>
 </body>
