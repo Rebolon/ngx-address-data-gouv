@@ -1,0 +1,14 @@
+{
+  "name": "ng-address-data-gouv-lib",
+  "version": "0.0.4",
+  "author": "Rebolon",
+  "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
+  "repository": "https://github.com/Rebolon/ng-address-data-gouv",
+  "peerDependencies": {
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}

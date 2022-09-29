@@ -1,13 +1,8 @@
 # NgAddressDataGouv
 
-The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of https://geo.api.gouv.fr
 With this component you can fill an french address that will be validated against official geo.api.gouv.fr.
 
-You may also import the library to use the component inside your angular project.
-
 ## Usage
-
-### All application
 
 You only need to require the javascript files in your html template like this:
 
@@ -19,23 +14,8 @@ You only need to require the javascript files in your html template like this:
 And then you can use the custom elements everywhere like this:
 
 ```
-<app-search-address></app-search-address>
+<ng-address-data-gouv-search></ng-address-data-gouv-search>
 ```
-
-### Angular app
-
-If you want to include the component in your angular project, you can import it as a library like this :
-
-```
-<!-- Any module of your application -->
-@NgModule({
-  imports: [
-    ...,
-    NgAddressDataGouvModule
-  ],
-```
-
-And then, use it as any other component inside your project.
 
 ### Parameters
 
