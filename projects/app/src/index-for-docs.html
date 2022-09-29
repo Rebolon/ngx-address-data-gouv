@@ -23,7 +23,7 @@
 <header>
   <div class="container">
     <h1>ng-address-data-gouv</h1>
-    <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : geo.api.gouv.fr</h2>
+    <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : https://adresse.data.gouv.fr/api-doc</h2>
 
     <section id="downloads">
       <a href="https://github.com/Rebolon/ng-address-data-gouv" class="btn btn-github"><span class="icon"></span>View on
@@ -37,8 +37,8 @@
     <h1 id="ngaddressdatagouv">NgAddressDataGouv</h1>
 
     <p>The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of
-      https://geo.api.gouv.fr
-      With this component you can fill an french address that will be validated against official geo.api.gouv.fr.</p>
+      https://adresse.data.gouv.fr/api-doc<br/>
+      With this component you can fill an french address that will be validated against official https://adresse.data.gouv.fr/api-doc</p>
 
     <p>You may also import the StandaloneModule to use the component inside your angular project.</p>
 
@@ -55,8 +55,7 @@
       <div class="highlight">
         <pre class="highlight">
           <code>
-            &lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es2015.js" type="module"&gt;&lt;/script&gt;
-&lt;script src="node_modules/ng-address-data-gouv/dist/dx/output-es5.js" nomodule&gt;&lt;/script&gt;
+            &lt;script src="node_modules/ng-address-data-gouv/dist/app/output.js" type="module"&gt;&lt;/script&gt;
           </code>
         </pre>
       </div>
@@ -68,7 +67,7 @@
       <div class="highlight">
         <pre class="highlight">
           <code>
-            &lt;app-search-address&gt;&lt;/app-search-address&gt;
+            &lt;ng-address-data-gouv-search&gt;&lt;/ng-address-data-gouv-search&gt;
           </code>
         </pre>
       </div>
@@ -85,7 +84,7 @@
         Date()).getTime();
       </li>
       <li>uri: of the API in case you host your own server (cloned from https://github.com/etalab), default is the
-        official uri https://api-adresse.data.gouv.fr
+        official uri https://adresse.data.gouv.fr/api-doc
       </li>
     </ul>
 
@@ -101,7 +100,7 @@
       <div class="highlight">
         <pre class="highlight">
           <code>
-            &lt;app-search-address (addressFound)="console.log($event)" width="500"&gt;&lt;/app-search-address&gt;
+            &lt;ng-address-data-gouv-search (addressFound)="console.log($event)" label="Just fill the input with a french postal address: " width="500"&gt;&lt;/ng-address-data-gouv-search&gt;
           </code>
         </pre>
       </div>

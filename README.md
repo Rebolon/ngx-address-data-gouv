@@ -1,7 +1,8 @@
 # NgAddressDataGouv
 
-The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of https://geo.api.gouv.fr
-With this component you can fill an french address that will be validated against official geo.api.gouv.fr.
+The aim of this project is to provide a web custom elements with an autocomplete input that consumes the API of https://adresse.data.gouv.fr/api-doc
+
+With this component you can fill an french address that will be validated against official https://adresse.data.gouv.fr/api-doc
 
 You may also import the library to use the component inside your angular project.
 
@@ -12,30 +13,14 @@ You may also import the library to use the component inside your angular project
 You only need to require the javascript files in your html template like this:
 
 ```
-<script src="node_modules/ng-address-data-gouv/dist/dx/output-es2015.js" type="module"></script>
-<script src="node_modules/ng-address-data-gouv/dist/dx/output-es5.js" nomodule></script>
+<script src="node_modules/ng-address-data-gouv/dist/app/output.js" type="module"></script>
 ```
 
 And then you can use the custom elements everywhere like this:
 
 ```
-<app-search-address></app-search-address>
+<ng-address-data-gouv-search></ng-address-data-gouv-search>
 ```
-
-### Angular app
-
-If you want to include the component in your angular project, you can import it as a library like this :
-
-```
-<!-- Any module of your application -->
-@NgModule({
-  imports: [
-    ...,
-    NgAddressDataGouvModule
-  ],
-```
-
-And then, use it as any other component inside your project.
 
 ### Parameters
 
@@ -44,16 +29,16 @@ And then, use it as any other component inside your project.
 * placeholder: of the input, default is empty
 * label: of the input, default is empty
 * id: of the input if you need one, default is like this 'ri-address-search-component-' + (new Date()).getTime();
-* uri: of the API in case you host your own server (cloned from https://github.com/etalab), default is the official uri https://api-adresse.data.gouv.fr
+* uri: of the API in case you host your own server (cloned from https://github.com/etalab), default is the official uri https://adresse.data.gouv.fr/api-doc
 
 ### Output
 
-* addressFound: the full address retreived from API with coordinates
+* addressFound: the full address retrieved from API with coordinates
 
 ### Sample
 
 ```
-<app-search-address (addressFound)="console.log($event)" width="500"></app-search-address>
+<ng-address-data-gouv-search(addressFound)="console.log($event)" label="Just fill the input with a french postal address: " width="500"></app-search-address>
 ```
 
 ### Extra infos

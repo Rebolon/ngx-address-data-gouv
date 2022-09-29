@@ -1,6 +1,8 @@
 {
-  "name": "ng-address-data-gouv",
+  "name": "ng-address-data-gouv-lib",
   "version": "0.0.4",
+  "author": "Rebolon",
+  "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
   "repository": "https://github.com/Rebolon/ng-address-data-gouv",
   "peerDependencies": {
     "@angular/common": "^14.1.0",
@@ -9,11 +11,11 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "module": "fesm2015/ng-address-data-gouv.mjs",
-  "es2020": "fesm2020/ng-address-data-gouv.mjs",
-  "esm2020": "esm2020/ng-address-data-gouv.mjs",
-  "fesm2020": "fesm2020/ng-address-data-gouv.mjs",
-  "fesm2015": "fesm2015/ng-address-data-gouv.mjs",
+  "module": "fesm2015/ng-address-data-gouv-lib.mjs",
+  "es2020": "fesm2020/ng-address-data-gouv-lib.mjs",
+  "esm2020": "esm2020/ng-address-data-gouv-lib.mjs",
+  "fesm2020": "fesm2020/ng-address-data-gouv-lib.mjs",
+  "fesm2015": "fesm2015/ng-address-data-gouv-lib.mjs",
   "typings": "index.d.ts",
   "exports": {
     "./package.json": {
@@ -21,11 +23,11 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2020": "./esm2020/ng-address-data-gouv.mjs",
-      "es2020": "./fesm2020/ng-address-data-gouv.mjs",
-      "es2015": "./fesm2015/ng-address-data-gouv.mjs",
-      "node": "./fesm2015/ng-address-data-gouv.mjs",
-      "default": "./fesm2020/ng-address-data-gouv.mjs"
+      "esm2020": "./esm2020/ng-address-data-gouv-lib.mjs",
+      "es2020": "./fesm2020/ng-address-data-gouv-lib.mjs",
+      "es2015": "./fesm2015/ng-address-data-gouv-lib.mjs",
+      "node": "./fesm2015/ng-address-data-gouv-lib.mjs",
+      "default": "./fesm2020/ng-address-data-gouv-lib.mjs"
     }
   },
   "sideEffects": false

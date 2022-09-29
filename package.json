@@ -4,13 +4,15 @@
   "author": "Rebolon",
   "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
   "repository": "https://github.com/Rebolon/ng-address-data-gouv",
+  "homepage": "",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --project lib && ng build --output-hashing=none --project app && npm run concat",
-    "concat": "mkdir -p dist\\app\\assets\\js && cp projects/app/src/index-for-docs.html dist/app/index.html && concat -o dist/app/assets/js/output.js dist/app/runtime.js dist/app/polyfills.js dist/app/main.js",
+    "concat": "mkdir dist\\app\\assets\\js && cp projects/app/src/index-for-docs.html dist/app/index.html && concat -o dist/app/assets/js/output.js dist/app/runtime.js dist/app/polyfills.js dist/app/main.js",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "publish": "npm publish --access=public"
   },
   "private": false,
   "dependencies": {
