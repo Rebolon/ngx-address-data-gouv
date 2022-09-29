@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/page.css">
   <link rel="stylesheet" href="assets/css/output.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
   <style>
     ul > li {
       color: black;
@@ -174,10 +175,10 @@
 <script src="/output.js" type="module"></script>
 <script>
   /*
-  * This is a sample on how to listen on app-search-address
+  * This is a sample on how to listen on ng-address-data-gouv-search
   * event when an address is selected by a user
   */
-  const el = document.querySelector('app-search-address');
+  const el = document.querySelector('ng-address-data-gouv-search');
   el.addEventListener('addressFound', (event) => {
     let res = event.detail
     let address = res.properties

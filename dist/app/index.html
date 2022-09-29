@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="assets/css/page.css">
   <link rel="stylesheet" href="assets/css/output.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
   <style>
     ul > li {
       color: black;
@@ -23,7 +24,7 @@
 <header>
   <div class="container">
     <h1>ng-address-data-gouv</h1>
-    <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : https://geo.api.gouv.fr</h2>
+    <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : https://adresse.data.gouv.fr/api-doc</h2>
 
     <section id="downloads">
       <a href="https://github.com/Rebolon/ng-address-data-gouv" class="btn btn-github"><span class="icon"></span>View on
@@ -37,8 +38,8 @@
     <h1 id="ngaddressdatagouv">NgAddressDataGouv</h1>
 
     <p>The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of
-      https://geo.api.gouv.fr<br/>
-      With this component you can fill an french address that will be validated against official geo.api.gouv.fr.</p>
+      https://adresse.data.gouv.fr/api-doc<br/>
+      With this component you can fill an french address that will be validated against official https://adresse.data.gouv.fr/api-doc</p>
 
     <p>You may also import the StandaloneModule to use the component inside your angular project.</p>
 
@@ -84,7 +85,7 @@
         Date()).getTime();
       </li>
       <li>uri: of the API in case you host your own server (cloned from https://github.com/etalab), default is the
-        official uri https://api-adresse.data.gouv.fr
+        official uri https://adresse.data.gouv.fr/api-doc
       </li>
     </ul>
 
@@ -174,10 +175,10 @@
 <script src="/output.js" type="module"></script>
 <script>
   /*
-  * This is a sample on how to listen on app-search-address
+  * This is a sample on how to listen on ng-address-data-gouv-search
   * event when an address is selected by a user
   */
-  const el = document.querySelector('app-search-address');
+  const el = document.querySelector('ng-address-data-gouv-search');
   el.addEventListener('addressFound', (event) => {
     let res = event.detail
     let address = res.properties
