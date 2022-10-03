@@ -10,13 +10,23 @@ You may also import the library to use the component inside your angular project
 
 `npm install @rebolon/ng-address-data-gouv`
 
-### All application
+### Html or any web applications
 
 You only need to require the javascript files in your html template like this:
 
 ```
 <script src="node_modules/ng-address-data-gouv/dist/app/output.js" type="module"></script>
 ```
+
+### Angular application
+
+Import the library from dist like this
+
+```
+import {AddressSearchComponent, NgAddressDataGouvModule} from '@rebolon/ng-address-data-gouv/dist/lib/';
+```
+
+### All application
 
 And then you can use the custom elements everywhere like this:
 

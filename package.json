@@ -1,19 +1,20 @@
 {
   "name": "@rebolon/ng-address-data-gouv",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "author": "Rebolon",
   "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
   "repository": "https://github.com/Rebolon/ng-address-data-gouv",
   "homepage": "https://rebolon.github.io/ng-address-data-gouv/",
+  "licence": "MIT license",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --project lib && ng build --output-hashing=none --project app && npm run concat && npm run build-docs",
-    "build-docs": "cp -r dist/app/* docs && rm docs/main.js docs/polyfills.js docs/runtime.js",
+    "build": "ng build --project lib && ng build --output-hashing=none --project app && npm run concat && npm run copy-before-publish && npm run build-docs",
+    "build-docs": "cp -r dist/app/* docs && rm docs/main.js docs/polyfills.js docs/runtime.js && sed -i 's/base href=\".*\"/base href=\"\\/ng-address-data-gouv\\/\"/' docs/index.html",
     "concat": "mkdir dist\\app\\assets\\js && mv dist/app/styles.css dist/app/assets/css/ && cp projects/app/src/index-for-docs.html dist/app/index.html && concat -o dist/app/assets/js/output.js dist/app/runtime.js dist/app/polyfills.js dist/app/main.js",
+    "copy-before-publish": "cp package.json dist/ && cp README.md dist/",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "publish": "npm publish --access=public"
+    "test": "ng test"
   },
   "private": false,
   "dependencies": {
