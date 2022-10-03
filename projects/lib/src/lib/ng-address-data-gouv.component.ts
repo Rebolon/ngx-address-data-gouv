@@ -79,7 +79,7 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
   @Input() uri: string = '';
   @Output() isLoading: ReplaySubject<boolean> = new ReplaySubject(1);
   @Output() addressFound: Observable<AddressAPIResult> = this.selectedAddress$.asObservable().pipe(
-    filter((value: any) => value && typeof value === 'object' && value.constructor.name === 'AddressAPIResult')
+    filter((value: any) => value && typeof value === 'object' && value.type !== 'undefined')
   );
 
   // Memory leak prevention

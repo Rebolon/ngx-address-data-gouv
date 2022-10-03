@@ -76,7 +76,7 @@ class AddressSearchComponent {
         this.id = 'ri-address-search-component-' + (new Date()).getTime();
         this.uri = '';
         this.isLoading = new ReplaySubject(1);
-        this.addressFound = this.selectedAddress$.asObservable().pipe(filter((value) => value && typeof value === 'object' && value.constructor.name === 'AddressAPIResult'));
+        this.addressFound = this.selectedAddress$.asObservable().pipe(filter((value) => value && typeof value === 'object' && value.type !== 'undefined'));
         // Memory leak prevention
         this.ngUnsubscribe = new Subject();
     }
