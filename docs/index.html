@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US" class="  ext-strict">
 <head>
+  <meta charset="utf-8">
+  <title>Demo for standalone web-component</title>
+  <base href="/ng-address-data-gouv/">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,7 +59,9 @@
 
     <h2 id="usage">Usage</h2>
 
-    <p>You only need to require the javascript files in your html template like this:</p>
+    <h3>Html or any web applications</h3>
+
+    <p>This is the web-components usage: you only need to require the javascript files in your html template like this:</p>
 
     <div class="highlighter-rouge">
       <div class="highlight">
@@ -67,6 +72,29 @@
         </pre>
       </div>
     </div>
+
+    <h3>Angular application</h3>
+
+    <p>This is the library usage: Import the library from dist in your module like this</p>
+
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            import {AddressSearchComponent, NgAddressDataGouvModule} from '@rebolon/ng-address-data-gouv/dist/lib/';
+            ...
+            @NgModule({
+              imports: [
+                ...
+                NgAddressDataGouvModule
+              ],
+            ...
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <h3>Usage of the component</h3>
 
     <p>And then you can use the custom elements everywhere like this:</p>
 
