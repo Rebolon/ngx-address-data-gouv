@@ -25,5 +25,5 @@ export declare class AddressSearchComponent implements OnInit, OnDestroy {
     onKeyUp(event: Event): void;
     selectAddress(address: AddressAPIResult): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<AddressSearchComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<AddressSearchComponent, "ng-address-data-gouv-search", never, { "loaderSize": "loaderSize"; "width": "width"; "placeholder": "placeholder"; "label": "label"; "id": "id"; "uri": "uri"; }, { "isLoading": "isLoading"; "addressFound": "addressFound"; }, never, never, false>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AddressSearchComponent, "ng-address-data-gouv-search", never, { "loaderSize": "loaderSize"; "width": "width"; "placeholder": "placeholder"; "label": "label"; "id": "id"; "uri": "uri"; }, { "isLoading": "isLoading"; "addressFound": "addressFound"; }, never, never, false, never>;
 }

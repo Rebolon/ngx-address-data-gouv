@@ -17,6 +17,7 @@ import {Service} from './ng-address-data-gouv.service';
 import {AddressAPIResult} from './ng-address-data-gouv';
 
 @Component({
+  standalone: true,
   selector: 'ng-address-data-gouv-search',
   template: `
     <label for="{{id}}" *ngIf="label">{{label}}</label>
