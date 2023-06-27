@@ -1,6 +1,6 @@
 {
   "name": "@rebolon/ng-address-data-gouv",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": "Rebolon",
   "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
   "repository": "https://github.com/Rebolon/ng-address-data-gouv",
@@ -29,7 +29,6 @@
     "@angular/router": "^15.2.9",
     "concat": "^1.0.3",
     "document-register-element": "^1.14.10",
-    "ng-address-data-gouv": "^0.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
