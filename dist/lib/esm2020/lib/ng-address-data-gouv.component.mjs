@@ -64,8 +64,8 @@ export class AddressSearchComponent {
         this.inputValue.next(address.properties.label);
     }
 }
-AddressSearchComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: AddressSearchComponent, deps: [{ token: i1.Service }], target: i0.ɵɵFactoryTarget.Component });
-AddressSearchComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "14.1.3", type: AddressSearchComponent, selector: "ng-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
+AddressSearchComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: AddressSearchComponent, deps: [{ token: i1.Service }], target: i0.ɵɵFactoryTarget.Component });
+AddressSearchComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.9", type: AddressSearchComponent, selector: "ng-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
         Service
     ], ngImport: i0, template: `
     <label for="{{id}}" *ngIf="label">{{label}}</label>
@@ -82,7 +82,7 @@ AddressSearchComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0",
        </li>
     </ul>
   `, isInline: true, styles: ["input{border:.2px solid #ccc}ul{-webkit-padding-start:0px;padding-inline-start:0px;-webkit-margin-before:0em;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "pipe", type: i2.AsyncPipe, name: "async" }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: AddressSearchComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: AddressSearchComponent, decorators: [{
             type: Component,
             args: [{ selector: 'ng-address-data-gouv-search', template: `
     <label for="{{id}}" *ngIf="label">{{label}}</label>

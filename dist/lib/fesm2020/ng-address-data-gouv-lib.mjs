@@ -9,10 +9,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
 
 class Service {
-    constructor(api) {
-        this.api = api;
-        this._uri = 'https://api-adresse.data.gouv.fr';
-    }
     /**
      * Allow to change the uri if you host your own addressDataGouv service
      */
@@ -21,6 +17,10 @@ class Service {
     }
     get urlSearch() {
         return `${this._uri}/search/`;
+    }
+    constructor(api) {
+        this.api = api;
+        this._uri = 'https://api-adresse.data.gouv.fr';
     }
     get(loadOptions) {
         const options = {
@@ -47,9 +47,9 @@ class Service {
         return this.get({ q: text, limit, type, autocomplete });
     }
 }
-Service.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: Service, deps: [{ token: i1.HttpClient }], target: i0.ɵɵFactoryTarget.Injectable });
-Service.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: Service, providedIn: 'root' });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: Service, decorators: [{
+Service.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: Service, deps: [{ token: i1.HttpClient }], target: i0.ɵɵFactoryTarget.Injectable });
+Service.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: Service, providedIn: 'root' });
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: Service, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -116,8 +116,8 @@ class AddressSearchComponent {
         this.inputValue.next(address.properties.label);
     }
 }
-AddressSearchComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: AddressSearchComponent, deps: [{ token: Service }], target: i0.ɵɵFactoryTarget.Component });
-AddressSearchComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "14.1.3", type: AddressSearchComponent, selector: "ng-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
+AddressSearchComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: AddressSearchComponent, deps: [{ token: Service }], target: i0.ɵɵFactoryTarget.Component });
+AddressSearchComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.2.9", type: AddressSearchComponent, selector: "ng-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
         Service
     ], ngImport: i0, template: `
     <label for="{{id}}" *ngIf="label">{{label}}</label>
@@ -134,7 +134,7 @@ AddressSearchComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0",
        </li>
     </ul>
   `, isInline: true, styles: ["input{border:.2px solid #ccc}ul{-webkit-padding-start:0px;padding-inline-start:0px;-webkit-margin-before:0em;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: i2.NgForOf, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "directive", type: i2.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "directive", type: i2.NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "pipe", type: i2.AsyncPipe, name: "async" }] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: AddressSearchComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: AddressSearchComponent, decorators: [{
             type: Component,
             args: [{ selector: 'ng-address-data-gouv-search', template: `
     <label for="{{id}}" *ngIf="label">{{label}}</label>
@@ -181,14 +181,14 @@ class NgAddressDataGouvModule {
         customElements.define('ng-address-data-gouv-search', elRiAd);
     }
 }
-NgAddressDataGouvModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.NgModule });
-NgAddressDataGouvModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, declarations: [AddressSearchComponent], imports: [BrowserModule,
+NgAddressDataGouvModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.NgModule });
+NgAddressDataGouvModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, declarations: [AddressSearchComponent], imports: [BrowserModule,
         CommonModule,
         HttpClientModule], exports: [AddressSearchComponent] });
-NgAddressDataGouvModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, imports: [BrowserModule,
+NgAddressDataGouvModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, imports: [BrowserModule,
         CommonModule,
         HttpClientModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [

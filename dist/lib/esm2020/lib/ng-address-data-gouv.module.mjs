@@ -15,14 +15,14 @@ export class NgAddressDataGouvModule {
         customElements.define('ng-address-data-gouv-search', elRiAd);
     }
 }
-NgAddressDataGouvModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.NgModule });
-NgAddressDataGouvModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, declarations: [AddressSearchComponent], imports: [BrowserModule,
+NgAddressDataGouvModule.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, deps: [{ token: i0.Injector }], target: i0.ɵɵFactoryTarget.NgModule });
+NgAddressDataGouvModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, declarations: [AddressSearchComponent], imports: [BrowserModule,
         CommonModule,
         HttpClientModule], exports: [AddressSearchComponent] });
-NgAddressDataGouvModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, imports: [BrowserModule,
+NgAddressDataGouvModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, imports: [BrowserModule,
         CommonModule,
         HttpClientModule] });
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "14.1.3", ngImport: i0, type: NgAddressDataGouvModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.2.9", ngImport: i0, type: NgAddressDataGouvModule, decorators: [{
             type: NgModule,
             args: [{
                     declarations: [
