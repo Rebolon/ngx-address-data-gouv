@@ -19,11 +19,10 @@ export declare class AddressSearchComponent implements OnInit, OnDestroy {
     isLoading: ReplaySubject<boolean>;
     addressFound: Observable<AddressAPIResult>;
     protected ngUnsubscribe: Subject<void>;
-    constructor(service: Service);
     ngOnInit(): void;
     ngOnDestroy(): void;
     onKeyUp(event: Event): void;
     selectAddress(address: AddressAPIResult): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<AddressSearchComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<AddressSearchComponent, "ng-address-data-gouv-search", never, { "loaderSize": "loaderSize"; "width": "width"; "placeholder": "placeholder"; "label": "label"; "id": "id"; "uri": "uri"; }, { "isLoading": "isLoading"; "addressFound": "addressFound"; }, never, never, false, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AddressSearchComponent, "ng-address-data-gouv-search", never, { "loaderSize": { "alias": "loaderSize"; "required": false; }; "width": { "alias": "width"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "label": { "alias": "label"; "required": false; }; "id": { "alias": "id"; "required": false; }; "uri": { "alias": "uri"; "required": false; }; }, { "isLoading": "isLoading"; "addressFound": "addressFound"; }, never, never, true, never>;
 }

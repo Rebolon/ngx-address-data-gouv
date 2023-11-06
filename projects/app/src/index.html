@@ -9,17 +9,10 @@
 </head>
 <body>
   <ng-address-data-gouv-search></ng-address-data-gouv-search>
-  <pre></pre>
   <script>
     const el = document.querySelector('ng-address-data-gouv-search');
-    const res = document.querySelector('pre');
     el.addEventListener('isLoading', (event) => {
       console.info(new Date(), 'isLoading', event.detail)
-      res.innerHTML = res.innerHTML + "\n" + event.detail;
-    });
-    el.addEventListener('addressFound', (event) => {
-      console.info(new Date(), 'addressFound', event.detail)
-      res.innerHTML = res.innerHTML + "\n" + JSON.stringify(event.detail);
     });
   </script>
 </body>

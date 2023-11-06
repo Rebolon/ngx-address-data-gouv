@@ -5,11 +5,10 @@
   "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
   "repository": "https://github.com/Rebolon/ng-address-data-gouv",
   "peerDependencies": {
-    "@angular/common": "^16.1",
-    "@angular/core": "^16.1"
+    "@angular/common": "^16.2.11",
+    "@angular/core": "^16.2.11"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  },
-  "sideEffects": false
+  }
 }

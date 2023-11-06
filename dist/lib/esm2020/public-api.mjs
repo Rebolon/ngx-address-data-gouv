@@ -1,7 +1,0 @@
-/*
- * Public API Surface of ng-address-data-gouv
- */
-export * from './lib/ng-address-data-gouv.service';
-export * from './lib/ng-address-data-gouv.component';
-export * from './lib/ng-address-data-gouv.module';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL2xpYi9zcmMvcHVibGljLWFwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILGNBQWMsb0NBQW9DLENBQUM7QUFDbkQsY0FBYyxzQ0FBc0MsQ0FBQztBQUNyRCxjQUFjLG1DQUFtQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBuZy1hZGRyZXNzLWRhdGEtZ291dlxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vbGliL25nLWFkZHJlc3MtZGF0YS1nb3V2LnNlcnZpY2UnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbmctYWRkcmVzcy1kYXRhLWdvdXYuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL25nLWFkZHJlc3MtZGF0YS1nb3V2Lm1vZHVsZSc7XG4iXX0=

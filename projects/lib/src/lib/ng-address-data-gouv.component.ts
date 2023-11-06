@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, Output, inject} from '@angular/core';
 import {
   BehaviorSubject,
   debounceTime,
@@ -15,9 +15,12 @@ import {
 } from 'rxjs';
 import {Service} from './ng-address-data-gouv.service';
 import {AddressAPIResult} from './ng-address-data-gouv';
+import { AsyncPipe, CommonModule, NgFor, NgStyle } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   standalone: true,
+  imports: [NgStyle, NgFor, AsyncPipe, CommonModule, HttpClientModule, ],
   selector: 'ng-address-data-gouv-search',
   template: `
     <label for="{{id}}" *ngIf="label">{{label}}</label>
@@ -36,30 +39,33 @@ import {AddressAPIResult} from './ng-address-data-gouv';
   `,
   styles: [
     `
-          input {
-              border: 0.2px solid #ccc;
-          }
+    input {
+        border: 0.2px solid #ccc;
+    }
 
-          ul {
-              padding-inline-start: 0px;
-              margin-block-start: 0em;
-          }
+    ul {
+        padding-inline-start: 0px;
+        margin-block-start: 0em;
+    }
 
-          li {
-              list-style-type: none;
-              cursor: pointer;
-          }
+    li {
+        list-style-type: none;
+        cursor: pointer;
+    }
 
-          li:hover {
-              padding-left: 5px;
-          }
+    li:hover {
+        padding-left: 5px;
+    }
     `,
   ],
   providers: [
+    HttpClient,
     Service
   ],
 })
 export class AddressSearchComponent implements OnInit, OnDestroy {
+  protected service: Service = inject(Service);
+
   // data store containers
   protected selectedAddress$: BehaviorSubject<AddressAPIResult> = new BehaviorSubject({} as AddressAPIResult);
   protected listAddresses$: Subject<AddressAPIResult[]> = new Subject() as Subject<AddressAPIResult[]>;
@@ -85,8 +91,6 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
 
   // Memory leak prevention
   protected ngUnsubscribe: Subject<void> = new Subject();
-
-  constructor(protected service: Service) {}
 
   ngOnInit(): void {
     if (this.uri) {

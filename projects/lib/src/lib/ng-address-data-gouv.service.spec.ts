@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NgAddressDataGouvService } from './ng-address-data-gouv.service';
+import { Service as NgAddressDataGouvService } from './ng-address-data-gouv.service';
 
 describe('NgAddressDataGouvService', () => {
   let service: NgAddressDataGouvService;

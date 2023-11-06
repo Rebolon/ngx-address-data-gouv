@@ -1,18 +1,252 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en-US" class="  ext-strict">
+<head>
   <meta charset="utf-8">
   <title>Demo for standalone web-component</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="styles.ef46db3751d8e999.css"></head>
-<body>
-  <ng-address-data-gouv-search></ng-address-data-gouv-search>
-  <script>
-    const el = document.querySelector('ng-address-data-gouv-search');
-    el.addEventListener('isLoading', (event) => {
-      console.info(new Date(), 'isLoading', event.detail)
-    });
-  </script>
-<script src="runtime.231e96734c9fdc57.js" type="module"></script><script src="polyfills.c27d6fda2cc8473d.js" type="module"></script><script src="main.220fa9e5bf4cacd2.js" type="module"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-</body></html>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/page.css">
+  <link rel="stylesheet" href="assets/css/output.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    ul > li {
+      color: black;
+    }
+    input {
+      font-size: 16px;
+    }
+  </style>
+
+</head>
+
+<body class=" ext-webkit ext-chrome" id="syno-nsc-ext-gen3">
+
+<header>
+  <div class="container">
+    <h1>ng-address-data-gouv</h1>
+    <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : https://adresse.data.gouv.fr/api-doc</h2>
+
+    <section id="downloads">
+      <a href="https://github.com/Rebolon/ng-address-data-gouv" class="btn btn-github"><span class="icon"></span>View on
+        GitHub</a>
+    </section>
+  </div>
+</header>
+
+<div class="container">
+  <section id="main_content">
+    <h1 id="ngaddressdatagouv">NgAddressDataGouv</h1>
+
+    <p>The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of
+      https://adresse.data.gouv.fr/api-doc<br/>
+      With this component you can fill an french address that will be validated against official https://adresse.data.gouv.fr/api-doc</p>
+
+    <p>You may also import the StandaloneModule to use the component inside your angular project.</p>
+
+    <h2>Installation</h2>
+
+    <p>
+      `npm install @rebolon/ng-address-data-gouv`
+    </p>
+
+    <h2 id="demo">Demo</h2>
+
+    <ng-address-data-gouv-search label="Just fill the input with a french postal address: " width="500"></ng-address-data-gouv-search>
+    <pre id="search-output"></pre>
+
+    <h2 id="usage">Usage</h2>
+
+    <h3>Html or any web applications</h3>
+
+    <p>This is the web-components usage: you only need to require the javascript files in your html template like this:</p>
+
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            &lt;script src="node_modules/ng-address-data-gouv/dist/app/output.js" type="module"&gt;&lt;/script&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <h3>Angular application</h3>
+
+    <p>This is the library usage: Import the library from dist in your module like this</p>
+
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            import {AddressSearchComponent, NgAddressDataGouvModule} from '@rebolon/ng-address-data-gouv/dist/lib/';
+            ...
+            @NgModule({
+              imports: [
+                ...
+                NgAddressDataGouvModule
+              ],
+            ...
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <h3>Usage of the component</h3>
+
+    <p>And then you can use the custom elements everywhere like this:</p>
+
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            &lt;ng-address-data-gouv-search&gt;&lt;/ng-address-data-gouv-search&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <h3 id="parameters">Parameters</h3>
+
+    <ul>
+      <li>loaderSize: in px, default is 15</li>
+      <li>width: of the input field, in px, default is 250</li>
+      <li>placeholder: of the input, default is empty</li>
+      <li>label: of the input, default is empty</li>
+      <li>id: of the input if you need one, default is like this ‘ri-address-search-component-‘ + (new
+        Date()).getTime();
+      </li>
+      <li>uri: of the API in case you host your own server (cloned from https://github.com/etalab), default is the
+        official uri https://adresse.data.gouv.fr/api-doc
+      </li>
+    </ul>
+
+    <h3 id="output">Output</h3>
+
+    <ul>
+      <li>addressFound: the full address retrieved from API with coordinates</li>
+      <li>isLoading: true/false while the http call is pending</li>
+    </ul>
+
+    <h3 id="sample">Sample</h3>
+
+    <div class="highlighter-rouge">
+      <div class="highlight">
+        <pre class="highlight">
+          <code>
+            &lt;ng-address-data-gouv-search (addressFound)="console.log($event)" label="Just fill the input with a french postal address: " width="500"&gt;&lt;/ng-address-data-gouv-search&gt;
+          </code>
+        </pre>
+      </div>
+    </div>
+
+    <h3 id="extra-infos">Extra infos</h3>
+
+    <p>In fact you should never keep node_modules in production, but you should move dist files in your app using
+      Webpack, or your Continous Integration with your pipelines.</p>
+
+    <p>This project was generated with <a href="https://github.com/angular/angular-cli">Angular CLI</a> version 8.0.6.
+    </p>
+
+    <h2 id="development-server">Development server</h2>
+
+    <p>Run <code class="highlighter-rouge">npm start</code> for a dev server. Navigate to <code
+      class="highlighter-rouge">http://localhost:4200/</code>. The app will automatically reload if you change any of
+      the source files.</p>
+
+    <p>This is the debug mode, a bit like a StoryBook project where the component AddressSearchComponent is built like a
+      full angular component</p>
+
+    <h2 id="build">Build</h2>
+
+    <p>Run <code class="highlighter-rouge">npm run build</code> to build the project as a custom element.</p>
+
+    <h2 id="running-unit-tests">Running unit tests</h2>
+
+    <p>Run <code class="highlighter-rouge">ng test</code> to execute the unit tests via <a
+      href="https://karma-runner.github.io/">Karma</a>.</p>
+
+    <h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
+
+    <p>Run <code class="highlighter-rouge">ng e2e</code> to execute the end-to-end tests via <a
+      href="http://www.protractortest.org/">Protractor</a>.</p>
+
+    <h2 id="further-help">Further help</h2>
+
+    <p>You can add issues or do some PR to improve this package !</p>
+
+  </section>
+</div>
+
+<div id="syno-nsc-ext-comp-1008" class=" x-tip-invalid"
+     style="position: absolute; z-index: 11000; visibility: hidden; display: none;">
+  <div class="x-tip-invalid-tl">
+    <div class="x-tip-invalid-tr">
+      <div class="x-tip-invalid-tc">
+        <div class="x-tip-invalid-header x-unselectable" id="syno-nsc-ext-gen4"><span
+          class="x-tip-invalid-header-text"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="x-tip-invalid-bwrap" id="syno-nsc-ext-gen5">
+    <div class="x-tip-invalid-ml">
+      <div class="x-tip-invalid-mr">
+        <div class="x-tip-invalid-mc" id="syno-nsc-ext-gen8">
+          <div class="x-tip-invalid-body" id="syno-nsc-ext-gen6" style="height: auto;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="x-tip-invalid-bl x-panel-nofooter" id="syno-nsc-ext-gen7">
+      <div class="x-tip-invalid-br">
+        <div class="x-tip-invalid-bc"></div>
+      </div>
+    </div>
+  </div>
+  <div class="x-tip-anchor x-tip-anchor-top" id="syno-nsc-ext-gen9" style="z-index: 11001;"></div>
+</div>
+
+<script src="assets/js/output.js" type="module"></script>
+<script>
+  /*
+  * This is a sample on how to listen on ng-address-data-gouv-search
+  * event when an address is selected by a user
+  */
+  const el = document.querySelector('ng-address-data-gouv-search');
+  el.addEventListener('addressFound', (event) => {
+    let res = event.detail
+    if (!res.hasOwnProperty('properties')) {
+      return
+    }
+    let address = res.properties
+    let coordinates = res.geometry.coordinates
+    let debugResult = document.querySelector('#search-output')
+    debugResult.innerHTML = `
+          Selected Address:
+          ${address.housenumber ? '  housenumber: ' + address.housenumber : 'no housenumber'}
+          ${address.name ? '  name: ' + address.name : 'no street name'}
+          ${address.postcode ? '  postcode: ' + address.postcode : 'no postcode'}
+          ${address.city ? '  city: ' + address.city : 'no city'}
+
+          Coordinates:
+          ${coordinates ? '  lat: ' + coordinates[0] : 'no latitude'}
+          ${coordinates ? '  long: ' + coordinates[1] : 'no longitude'}
+        `
+  });
+  el.addEventListener('isLoading', (event) => {
+    let isLoading = event.detail
+    let pendingMessage = "HTTP call to api is pending..."
+    let debugResult = document.querySelector('#search-output')
+    if (isLoading === true) {
+      debugResult.innerHTML = `
+          HTTP call to api is pending...
+        `
+    } else if (debugResult.innerText.trim() === pendingMessage) {
+      debugResult.innerHTML = ''
+    }
+  });
+</script>
+</body>
+</html>
