@@ -3,8 +3,7 @@ import { Injectable, inject, Component, Input, Output } from '@angular/core';
 import * as i1 from '@angular/common/http';
 import { HttpParams, HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
 import { EMPTY, map, shareReplay, BehaviorSubject, Subject, filter, ReplaySubject, takeUntil, debounceTime, switchMap } from 'rxjs';
-import * as i1$1 from '@angular/common';
-import { NgStyle, NgFor, AsyncPipe, CommonModule } from '@angular/common';
+import { NgStyle, AsyncPipe, CommonModule, NgFor } from '@angular/common';
 
 class Service {
     /**
@@ -114,11 +113,13 @@ class AddressSearchComponent {
         this.inputValue.next(address.properties.label);
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.1", ngImport: i0, type: AddressSearchComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "17.0.1", type: AddressSearchComponent, isStandalone: true, selector: "ng-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "17.0.1", type: AddressSearchComponent, isStandalone: true, selector: "ng-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
             HttpClient,
             Service
         ], ngImport: i0, template: `
-    <label for="{{id}}" *ngIf="label">{{label}}</label>
+  @if (id) {
+    <label for="{{id}}">{{label}}</label>
+  }
     <input 
       id="{{id}}" 
       [placeholder]="placeholder" 
@@ -126,17 +127,20 @@ class AddressSearchComponent {
       [value]="inputValue | async"
       (keyup)="onKeyUp($event)">
     <ul [ngStyle]="{ 'width': width+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
-       <li *ngFor="let addressList of listAddresses | async; let isOdd = odd;"
-           (click)="selectAddress(addressList)"
+      @for (addressList of listAddresses | async; track addressList; let isOdd = $odd) {
+       <li (click)="selectAddress(addressList)"
            [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}"><span>{{addressList.properties.label}}</span>
        </li>
+      }
     </ul>
-  `, isInline: true, styles: ["input{border:.2px solid #ccc}ul{padding-inline-start:0px;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "directive", type: NgFor, selector: "[ngFor][ngForOf]", inputs: ["ngForOf", "ngForTrackBy", "ngForTemplate"] }, { kind: "pipe", type: AsyncPipe, name: "async" }, { kind: "ngmodule", type: CommonModule }, { kind: "directive", type: i1$1.NgIf, selector: "[ngIf]", inputs: ["ngIf", "ngIfThen", "ngIfElse"] }, { kind: "ngmodule", type: HttpClientModule }] }); }
+  `, isInline: true, styles: ["input{border:.2px solid #ccc}ul{padding-inline-start:0px;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "pipe", type: AsyncPipe, name: "async" }, { kind: "ngmodule", type: CommonModule }, { kind: "ngmodule", type: HttpClientModule }] }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.1", ngImport: i0, type: AddressSearchComponent, decorators: [{
             type: Component,
             args: [{ standalone: true, imports: [NgStyle, NgFor, AsyncPipe, CommonModule, HttpClientModule,], selector: 'ng-address-data-gouv-search', template: `
-    <label for="{{id}}" *ngIf="label">{{label}}</label>
+  @if (id) {
+    <label for="{{id}}">{{label}}</label>
+  }
     <input 
       id="{{id}}" 
       [placeholder]="placeholder" 
@@ -144,10 +148,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.1", ngImpor
       [value]="inputValue | async"
       (keyup)="onKeyUp($event)">
     <ul [ngStyle]="{ 'width': width+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
-       <li *ngFor="let addressList of listAddresses | async; let isOdd = odd;"
-           (click)="selectAddress(addressList)"
+      @for (addressList of listAddresses | async; track addressList; let isOdd = $odd) {
+       <li (click)="selectAddress(addressList)"
            [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}"><span>{{addressList.properties.label}}</span>
        </li>
+      }
     </ul>
   `, providers: [
                         HttpClient,

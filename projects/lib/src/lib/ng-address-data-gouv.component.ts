@@ -23,7 +23,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   imports: [NgStyle, NgFor, AsyncPipe, CommonModule, HttpClientModule, ],
   selector: 'ng-address-data-gouv-search',
   template: `
-    <label for="{{id}}" *ngIf="label">{{label}}</label>
+  @if (id) {
+    <label for="{{id}}">{{label}}</label>
+  }
     <input 
       id="{{id}}" 
       [placeholder]="placeholder" 
@@ -31,13 +33,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
       [value]="inputValue | async"
       (keyup)="onKeyUp($event)">
     <ul [ngStyle]="{ 'width': width+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
-       <li *ngFor="let addressList of listAddresses | async; let isOdd = odd;"
-           (click)="selectAddress(addressList)"
+      @for (addressList of listAddresses | async; track addressList; let isOdd = $odd) {
+       <li (click)="selectAddress(addressList)"
            [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}"><span>{{addressList.properties.label}}</span>
        </li>
+      }
     </ul>
   `,
-  styles: [
+  styles:
     `
     input {
         border: 0.2px solid #ccc;
@@ -56,8 +59,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     li:hover {
         padding-left: 5px;
     }
-    `,
-  ],
+    `
+  ,
   providers: [
     HttpClient,
     Service
