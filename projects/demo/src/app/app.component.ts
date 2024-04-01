@@ -9,13 +9,13 @@ import { AddressAPIResult } from 'dist/ngx-address-data-gouv-search/lib/ngx-addr
   template: `
     <h1>Hello</h1>
     <ngx-address-data-gouv-search (addressFound)="setAddress($event)"></ngx-address-data-gouv-search>
-    <pre>{{dumpAddress()}}</pre>
+    <pre><code>{{dumpAddress()}}</code></pre>
   `,
 })
 export class AppComponent {
   title = 'demo ngx-address-data-gouv';
   address: WritableSignal<AddressAPIResult|undefined> = signal(undefined)
-  dumpAddress = computed(() => JSON.stringify(this.address()))
+  dumpAddress = computed(() => JSON.stringify(this.address(), null, 4))
   setAddress(address: AddressAPIResult) {
     this.address.set(address)
   }
