@@ -1,9 +1,9 @@
 {
   "name": "@rebolon/ngx-address-data-gouv-search",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Rebolon",
   "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
-  "repository": "https://github.com/Rebolon/ng-address-data-gouv",
+  "repository": "https://github.com/Rebolon/ngx-address-data-gouv",
   "peerDependencies": {
     "@angular/common": "^17",
     "@angular/core": "^17"

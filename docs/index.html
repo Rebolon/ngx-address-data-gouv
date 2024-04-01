@@ -27,7 +27,7 @@
 
 <header>
   <div class="container">
-    <h1>ngx-address-data-gouv</h1>
+    <h1>ngx-address-data-gouv-search</h1>
     <h2>Web Component with an input field with autocompletion that allows user to search real french addresses using official web service : https://adresse.data.gouv.fr/api-doc</h2>
 
     <section id="downloads">
@@ -39,7 +39,7 @@
 
 <div class="container">
   <section id="main_content">
-    <h1 id="ngaddressdatagouv">NgAddressDataGouv</h1>
+    <h1 id="ngaddressdatagouv">NgxAddressDataGouv</h1>
 
     <p>The aim of this project is to provide a web custom elements with an autocomplete input that consume the API of
       https://adresse.data.gouv.fr/api-doc<br/>
@@ -50,7 +50,7 @@
     <h2>Installation</h2>
 
     <p>
-      `npm install @rebolon/ngx-address-data-gouv`
+      `npm install @rebolon/ngx-address-data-gouv-search`
     </p>
 
     <h2 id="demo">Demo</h2>
@@ -68,7 +68,7 @@
       <div class="highlight">
         <pre class="highlight">
           <code>
-            &lt;script src="node_modules/ngx-address-data-gouv/dist/app/output.js" type="module"&gt;&lt;/script&gt;
+            &lt;script src="node_modules/ngx-address-data-gouv-search/dist/app/output.js" type="module"&gt;&lt;/script&gt;
           </code>
         </pre>
       </div>
@@ -76,18 +76,18 @@
 
     <h3>Angular application</h3>
 
-    <p>This is the library usage: Import the library from dist in your module like this</p>
+    <p>This is the library usage: Import the library from dist in your module or your component like this</p>
 
     <div class="highlighter-rouge">
       <div class="highlight">
         <pre class="highlight">
           <code>
-            import {AddressSearchComponent, NgAddressDataGouvModule} from '@rebolon/ngx-address-data-gouv/dist/lib/';
+            import {AddressSearchComponent} from '@rebolon/ngx-address-data-gouv-search/dist/lib/';
             ...
-            @NgModule({
+            @NgModule OR @Component({
               imports: [
                 ...
-                NgAddressDataGouvModule
+                AddressSearchComponent,
               ],
             ...
           </code>
