@@ -7,7 +7,7 @@ import { AddressAPIResult } from 'dist/ngx-address-data-gouv-search/lib/ngx-addr
   standalone: true,
   imports: [ AddressSearchComponent ],
   template: `
-    <h1>Hello</h1>
+    <h1>Fill the input to search a french postal adress:</h1>
     <ngx-address-data-gouv-search (addressFound)="setAddress($event)"></ngx-address-data-gouv-search>
     <pre><code>{{dumpAddress()}}</code></pre>
   `,
