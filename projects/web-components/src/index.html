@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Demo for standalone web-component</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <ngx-address-data-gouv-search></ngx-address-data-gouv-search>
+  <script>
+    const el = document.querySelector('ngx-address-data-gouv-search');
+    el.addEventListener('isLoading', (event) => {
+      console.info(new Date(), 'isLoading', event.detail)
+    });
+  </script>
+</body>
+</html>

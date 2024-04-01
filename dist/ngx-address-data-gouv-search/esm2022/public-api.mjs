@@ -1,0 +1,7 @@
+/*
+ * Public API Surface of ng-address-data-gouv
+ */
+export * from './lib/ngx-address-data-gouv.service';
+export * from './lib/ngx-address-data-gouv.component';
+export * from './lib/ngx-address-data-gouv';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL25neC1hZGRyZXNzLWRhdGEtZ291di1zZWFyY2gvc3JjL3B1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLHFDQUFxQyxDQUFDO0FBQ3BELGNBQWMsdUNBQXVDLENBQUM7QUFDdEQsY0FBYyw2QkFBNkIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgbmctYWRkcmVzcy1kYXRhLWdvdXZcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZ3gtYWRkcmVzcy1kYXRhLWdvdXYuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZ3gtYWRkcmVzcy1kYXRhLWdvdXYuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL25neC1hZGRyZXNzLWRhdGEtZ291dic7XG4iXX0=

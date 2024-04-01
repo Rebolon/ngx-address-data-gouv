@@ -10,7 +10,7 @@ MIT
 @angular/platform-browser
 MIT
 
-ng-address-data-gouv-lib
+@rebolon/ngx-address-data-gouv-search
 
 rxjs
 Apache-2.0
