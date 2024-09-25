@@ -149,7 +149,7 @@
             },
             "index": "projects/web-components/src/index.html",
             "polyfills": [
-              "projects/web-components/src/polyfills.ts"
+              "zone.js"
             ],
             "tsConfig": "projects/web-components/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
@@ -222,7 +222,9 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "projects/web-components/src/test.ts",
-            "polyfills": "projects/web-components/src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "tsConfig": "projects/web-components/tsconfig.spec.json",
             "karmaConfig": "projects/web-components/karma.conf.js",
             "inlineStyleLanguage": "scss",
