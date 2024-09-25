@@ -16,11 +16,11 @@ import {
 import {Service} from './ngx-address-data-gouv.service';
 import {AddressAPIResult} from './ngx-address-data-gouv';
 import { AsyncPipe, CommonModule, NgFor, NgStyle } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   standalone: true,
-  imports: [NgStyle, NgFor, AsyncPipe, CommonModule, HttpClientModule, ],
+  imports: [NgStyle, NgFor, AsyncPipe, CommonModule,],
   selector: 'ngx-address-data-gouv-search',
   template: `
   @if (id) {

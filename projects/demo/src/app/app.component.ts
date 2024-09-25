@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
 import { AddressSearchComponent } from '@rebolon/ngx-address-data-gouv-search';
 import { AddressAPIResult } from 'dist/ngx-address-data-gouv-search/lib/ngx-address-data-gouv';
 

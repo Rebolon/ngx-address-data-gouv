@@ -2,10 +2,12 @@ import {CUSTOM_ELEMENTS_SCHEMA, Injector, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {createCustomElement} from '@angular/elements';
 import { AddressSearchComponent } from 'projects/ngx-address-data-gouv-search/src/public-api';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   imports: [
     BrowserModule,
+    HttpClientModule,
     AddressSearchComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
