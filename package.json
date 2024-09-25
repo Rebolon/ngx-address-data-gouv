@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve --project=demo",
     "build": "ng build --project ngx-address-data-gouv-search && ng build --output-hashing=none --project web-components && npm run concat && npm run copy-before-publish && npm run build-docs && rm dist/web-components/*.js -f",
-    "build-docs": "cp -r dist/web-components/* docs && rm docs/main.js docs/polyfills.js docs/runtime.js && sed -i 's/base href=\".*\"/base href=\"\\/ngx-address-data-gouv-search\\/\"/' docs/index.html",
+    "build-docs": "cp -r dist/web-components/* docs && rm docs/main.js docs/polyfills.js docs/runtime.js && sed -i 's/base href=\".*\"/base href=\"\\/ngx-address-data-gouv\\/\"/' docs/index.html",
     "concat": "mkdir dist/web-components/assets/js && mv dist/web-components/styles.css dist/web-components/assets/css/ && cp projects/web-components/src/index-for-docs.html dist/web-components/index.html && node_modules/.bin/concat -o dist/web-components/assets/js/output.js dist/web-components/runtime.js dist/web-components/polyfills.js dist/web-components/main.js",
     "copy-before-publish": "cp package.json dist/ && cp README.md dist/",
     "watch": "ng build --watch --configuration development",

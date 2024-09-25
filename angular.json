@@ -86,13 +86,7 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "fileReplacements": [
-                {
-                  "replace": "projects/demo/src/environments/environment.ts",
-                  "with": "projects/demo/src/environments/environment.development.ts"
-                }
-              ]
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -131,13 +125,7 @@
             "styles": [
               "projects/demo/src/styles.scss"
             ],
-            "scripts": [],
-            "fileReplacements": [
-              {
-                "replace": "projects/demo/src/environments/environment.ts",
-                "with": "projects/demo/src/environments/environment.test.ts"
-              }
-            ]
+            "scripts": []
           }
         }
       }
@@ -194,6 +182,12 @@
               "outputHashing": "all"
             },
             "development": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/web-components/src/environments/environment.ts",
+                  "with": "projects/web-components/src/environments/environment.dev.ts"
+                }
+              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
