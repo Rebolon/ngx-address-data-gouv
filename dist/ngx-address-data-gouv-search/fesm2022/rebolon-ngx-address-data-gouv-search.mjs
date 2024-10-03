@@ -1,9 +1,9 @@
 import * as i1 from '@angular/common/http';
 import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
 import * as i0 from '@angular/core';
-import { Injectable, inject, Component, Input, Output } from '@angular/core';
+import { Injectable, inject, input, effect, Component, Output } from '@angular/core';
 import { EMPTY, map, shareReplay, BehaviorSubject, Subject, filter, ReplaySubject, takeUntil, debounceTime, switchMap } from 'rxjs';
-import { NgStyle, AsyncPipe, CommonModule, NgFor } from '@angular/common';
+import { NgStyle, AsyncPipe, CommonModule } from '@angular/common';
 
 class Service {
     #uri = 'https://api-adresse.data.gouv.fr';
@@ -11,6 +11,9 @@ class Service {
      * Allow to change the uri if you host your own addressDataGouv service
      */
     set uri(uri) {
+        if (uri.trim() === "") {
+            return;
+        }
         this.#uri = uri;
     }
     get urlSearch() {
@@ -43,10 +46,10 @@ class Service {
     search(text, limit = 5, type = 'housenumber', autocomplete = 0) {
         return this.get({ q: text, limit, type, autocomplete });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: Service, deps: [{ token: i1.HttpClient }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: Service, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: Service, deps: [{ token: i1.HttpClient }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: Service, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: Service, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: Service, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
@@ -66,21 +69,17 @@ class AddressSearchComponent {
         filter((data) => data.length > 0));
         this.inputValue = new BehaviorSubject("");
         // components API
-        this.loaderSize = 15;
-        this.width = 250;
-        this.placeholder = '';
-        this.label = '';
-        this.id = 'ngx-address-search-component-' + (new Date()).getTime();
-        this.uri = '';
+        this.loaderSize = input('15');
+        this.width = input('250');
+        this.placeholder = input('');
+        this.label = input('');
+        this.id = input('ngx-address-search-component-' + (new Date()).getTime());
+        this.uri = input('');
         this.isLoading = new ReplaySubject(1);
         this.addressFound = this.selectedAddress$.asObservable().pipe(filter((value) => value && typeof value === 'object' && value.type !== 'undefined'));
         // Memory leak prevention
         this.ngUnsubscribe = new Subject();
-    }
-    ngOnInit() {
-        if (this.uri) {
-            this.service.uri = this.uri;
-        }
+        effect(() => this.service.uri = this.uri());
         this.isLoading.next(false);
         this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe), debounceTime(250), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
             || value !== this.selectedAddress$.getValue().properties.label)).subscribe(() => this.isLoading.next(true));
@@ -112,65 +111,57 @@ class AddressSearchComponent {
         // change value of the input
         this.inputValue.next(address.properties.label);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: AddressSearchComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "18.2.5", type: AddressSearchComponent, isStandalone: true, selector: "ngx-address-data-gouv-search", inputs: { loaderSize: "loaderSize", width: "width", placeholder: "placeholder", label: "label", id: "id", uri: "uri" }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: AddressSearchComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.0.0-next.8", type: AddressSearchComponent, isStandalone: true, selector: "ngx-address-data-gouv-search", inputs: { loaderSize: { classPropertyName: "loaderSize", publicName: "loaderSize", isSignal: true, isRequired: false, transformFunction: null }, width: { classPropertyName: "width", publicName: "width", isSignal: true, isRequired: false, transformFunction: null }, placeholder: { classPropertyName: "placeholder", publicName: "placeholder", isSignal: true, isRequired: false, transformFunction: null }, label: { classPropertyName: "label", publicName: "label", isSignal: true, isRequired: false, transformFunction: null }, id: { classPropertyName: "id", publicName: "id", isSignal: true, isRequired: false, transformFunction: null }, uri: { classPropertyName: "uri", publicName: "uri", isSignal: true, isRequired: false, transformFunction: null } }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
             HttpClient,
             Service
         ], ngImport: i0, template: `
-  @if (id) {
-    <label for="{{id}}">{{label}}</label>
-  }
+    @if (id()) {
+      <label for="{{id()}}">{{ label() }}</label>
+    }
+
     <input
-      id="{{id}}"
-      [placeholder]="placeholder"
-      [ngStyle]="{ width: width+'px' }"
+      id="{{id()}}"
+      [placeholder]="placeholder()"
+      [ngStyle]="{ width: width()+'px' }"
       [value]="inputValue | async"
-      (keyup)="onKeyUp($event)">
-    <ul [ngStyle]="{ 'width': width+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
+      (keyup)="onKeyUp($event)"/>
+    <ul [ngStyle]="{ 'width': width()+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
       @for (addressList of listAddresses | async; track addressList; let isOdd = $odd) {
-       <li (click)="selectAddress(addressList)"
-           [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}"><span>{{addressList.properties.label}}</span>
-       </li>
+        <li (click)="selectAddress(addressList)"
+            [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}">
+          <span>{{ addressList.properties.label }}</span>
+        </li>
       }
     </ul>
   `, isInline: true, styles: ["input{border:.2px solid #ccc}ul{padding-inline-start:0px;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "pipe", type: AsyncPipe, name: "async" }, { kind: "ngmodule", type: CommonModule }] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "18.2.5", ngImport: i0, type: AddressSearchComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: AddressSearchComponent, decorators: [{
             type: Component,
-            args: [{ standalone: true, imports: [NgStyle, NgFor, AsyncPipe, CommonModule,], selector: 'ngx-address-data-gouv-search', template: `
-  @if (id) {
-    <label for="{{id}}">{{label}}</label>
-  }
+            args: [{ standalone: true, imports: [NgStyle, AsyncPipe, CommonModule,], selector: 'ngx-address-data-gouv-search', template: `
+    @if (id()) {
+      <label for="{{id()}}">{{ label() }}</label>
+    }
+
     <input
-      id="{{id}}"
-      [placeholder]="placeholder"
-      [ngStyle]="{ width: width+'px' }"
+      id="{{id()}}"
+      [placeholder]="placeholder()"
+      [ngStyle]="{ width: width()+'px' }"
       [value]="inputValue | async"
-      (keyup)="onKeyUp($event)">
-    <ul [ngStyle]="{ 'width': width+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
+      (keyup)="onKeyUp($event)"/>
+    <ul [ngStyle]="{ 'width': width()+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
       @for (addressList of listAddresses | async; track addressList; let isOdd = $odd) {
-       <li (click)="selectAddress(addressList)"
-           [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}"><span>{{addressList.properties.label}}</span>
-       </li>
+        <li (click)="selectAddress(addressList)"
+            [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}">
+          <span>{{ addressList.properties.label }}</span>
+        </li>
       }
     </ul>
   `, providers: [
                         HttpClient,
                         Service
                     ], styles: ["input{border:.2px solid #ccc}ul{padding-inline-start:0px;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"] }]
-        }], propDecorators: { loaderSize: [{
-                type: Input
-            }], width: [{
-                type: Input
-            }], placeholder: [{
-                type: Input
-            }], label: [{
-                type: Input
-            }], id: [{
-                type: Input
-            }], uri: [{
-                type: Input
-            }], isLoading: [{
+        }], ctorParameters: () => [], propDecorators: { isLoading: [{
                 type: Output
             }], addressFound: [{
                 type: Output

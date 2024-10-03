@@ -1,28 +1,28 @@
-import { OnDestroy, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { Service } from './ngx-address-data-gouv.service';
 import { AddressAPIResult } from './ngx-address-data-gouv';
 import * as i0 from "@angular/core";
-export declare class AddressSearchComponent implements OnInit, OnDestroy {
+export declare class AddressSearchComponent implements OnDestroy {
     protected service: Service;
     protected selectedAddress$: BehaviorSubject<AddressAPIResult>;
     protected listAddresses$: Subject<AddressAPIResult[]>;
     listAddresses: Observable<AddressAPIResult[]>;
     listAddressesForStylish: Observable<AddressAPIResult[]>;
     protected inputValue: BehaviorSubject<string>;
-    loaderSize: number;
-    width: number;
-    placeholder: string;
-    label: string;
-    id: string;
-    uri: string;
+    loaderSize: import("@angular/core").InputSignal<string>;
+    width: import("@angular/core").InputSignal<string>;
+    placeholder: import("@angular/core").InputSignal<string>;
+    label: import("@angular/core").InputSignal<string>;
+    id: import("@angular/core").InputSignal<string>;
+    uri: import("@angular/core").InputSignal<string>;
     isLoading: ReplaySubject<boolean>;
     addressFound: Observable<AddressAPIResult>;
     protected ngUnsubscribe: Subject<void>;
-    ngOnInit(): void;
+    constructor();
     ngOnDestroy(): void;
     onKeyUp(event: Event): void;
     selectAddress(address: AddressAPIResult): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<AddressSearchComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDeclaration<AddressSearchComponent, "ngx-address-data-gouv-search", never, { "loaderSize": { "alias": "loaderSize"; "required": false; }; "width": { "alias": "width"; "required": false; }; "placeholder": { "alias": "placeholder"; "required": false; }; "label": { "alias": "label"; "required": false; }; "id": { "alias": "id"; "required": false; }; "uri": { "alias": "uri"; "required": false; }; }, { "isLoading": "isLoading"; "addressFound": "addressFound"; }, never, never, true, never>;
+    static ɵcmp: i0.ɵɵComponentDeclaration<AddressSearchComponent, "ngx-address-data-gouv-search", never, { "loaderSize": { "alias": "loaderSize"; "required": false; "isSignal": true; }; "width": { "alias": "width"; "required": false; "isSignal": true; }; "placeholder": { "alias": "placeholder"; "required": false; "isSignal": true; }; "label": { "alias": "label"; "required": false; "isSignal": true; }; "id": { "alias": "id"; "required": false; "isSignal": true; }; "uri": { "alias": "uri"; "required": false; "isSignal": true; }; }, { "isLoading": "isLoading"; "addressFound": "addressFound"; }, never, never, true, never>;
 }

@@ -7,9 +7,11 @@ export interface AddressAPIResult {
 
 export interface AddressAPIProperties {
   city: string;
+  oldcity: string;
   citycode: string;
+  oldcitycode: string;
   context: string;
-  housenumber: string;
+  housenumber?: string;
   id: string;
   importance: number;
   label: string;
@@ -18,8 +20,8 @@ export interface AddressAPIProperties {
   score: number;
   street: string;
   type: 'housenumber'|'street'|'locality'|'municipality';
-  x: string;
-  y: string;
+  x: number;
+  y: number;
 }
 
 interface AddressAPIGeometry {

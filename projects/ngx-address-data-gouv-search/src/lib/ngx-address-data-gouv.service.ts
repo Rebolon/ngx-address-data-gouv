@@ -2,17 +2,21 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, map, Observable, shareReplay } from 'rxjs';
 import { AddressAPIProperties, AddressAPIResult } from './ngx-address-data-gouv';
+import { environment } from "../environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class Service {
-  #uri = 'https://api-adresse.data.gouv.fr';
+export class AddressService {
+  #uri = environment.baseUrl;
 
   /**
    * Allow to change the uri if you host your own addressDataGouv service
    */
   set uri(uri: string) {
+    if (uri.trim() === "") {
+      return;
+    }
     this.#uri = uri;
   }
 
@@ -43,10 +47,9 @@ export class Service {
     }
 
     return this.api
-      .request<{features: AddressAPIResult[]}>('GET', this.urlSearch, options)
+      .get<{features: AddressAPIResult[]}>(this.urlSearch, options)
       .pipe(
-        map((data) => data.features),
-        shareReplay(1)
+        map((data) => data.features)
       ) as Observable<AddressAPIResult[]>;
   }
 

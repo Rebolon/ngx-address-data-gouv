@@ -1,16 +1,30 @@
-import { TestBed } from '@angular/core/testing';
-
-import { Service as NgxAddressDataGouvService } from './ngx-address-data-gouv.service';
+import {AddressService as NgxAddressDataGouvService} from './ngx-address-data-gouv.service';
+import {HttpClient} from "@angular/common/http";
+import {mock} from "./mock.service";
+import {asyncData} from "../mocks/async-observable-helpers";
+import {of} from "rxjs";
 
 describe('NgxAddressDataGouvService', () => {
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let service: NgxAddressDataGouvService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(NgxAddressDataGouvService);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    service = new NgxAddressDataGouvService(httpClientSpy);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('can change service uri', () => {
+    const uri = 'https://fake.fake';
+    service.uri = uri;
+    expect(service.urlSearch).toContain(uri)
+  });
+
+  it('does http call', (done: DoneFn) => {
+    httpClientSpy.get.and.returnValue(asyncData(mock));
+    service.uri = 'https://fake.fake';
+    service.search('test').subscribe((_) => {
+      expect(_).toBe(mock.features)
+      done()
+    })
   });
 });
