@@ -19,8 +19,6 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2022": "./esm2022/rebolon-ngx-address-data-gouv-search.mjs",
-      "esm": "./esm2022/rebolon-ngx-address-data-gouv-search.mjs",
       "default": "./fesm2022/rebolon-ngx-address-data-gouv-search.mjs"
     }
   },

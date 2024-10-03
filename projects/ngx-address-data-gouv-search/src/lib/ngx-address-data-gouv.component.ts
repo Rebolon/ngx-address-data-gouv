@@ -1,42 +1,37 @@
-import {Component, Input, OnDestroy, OnInit, Output, inject} from '@angular/core';
-import {
-  BehaviorSubject,
-  debounceTime,
-  distinct,
-  filter,
-  fromEvent,
-  map,
-  Observable,
-  ReplaySubject,
-  Subject,
-  switchMap,
-  takeUntil,
-  tap
-} from 'rxjs';
-import {Service} from './ngx-address-data-gouv.service';
+import {ChangeDetectionStrategy, Component, effect, inject, input, OnDestroy, Output} from '@angular/core';
+import {BehaviorSubject, debounceTime, filter, Observable, ReplaySubject, Subject, switchMap, takeUntil} from 'rxjs';
+import {AddressService} from './ngx-address-data-gouv.service';
 import {AddressAPIResult} from './ngx-address-data-gouv';
-import { AsyncPipe, CommonModule, NgFor, NgStyle } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {AsyncPipe, CommonModule, NgFor, NgStyle} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
-  standalone: true,
-  imports: [NgStyle, NgFor, AsyncPipe, CommonModule, HttpClientModule, ],
   selector: 'ngx-address-data-gouv-search',
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgStyle, AsyncPipe, CommonModule,],
+  providers: [
+    HttpClient,
+    AddressService
+  ],
   template: `
-  @if (id) {
-    <label for="{{id}}">{{label}}</label>
-  }
+    @if (id()) {
+      <label for="{{id()}}">{{ label() }}</label>
+    }
+
     <input
-      id="{{id}}"
-      [placeholder]="placeholder"
-      [ngStyle]="{ width: width+'px' }"
+      id="{{id()}}"
+      [placeholder]="placeholder()"
+      [ngStyle]="{ width: width()+'px' }"
       [value]="inputValue | async"
-      (keyup)="onKeyUp($event)">
-    <ul [ngStyle]="{ 'width': width+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
+      (keyup)="onKeyUp($event)"/>
+    <ul [ngStyle]="{ 'width': width()+'px', 'border': (listAddressesForStylish | async) ? '0.2px solid #ccc' : '0px' }">
       @for (addressList of listAddresses | async; track addressList; let isOdd = $odd) {
-       <li (click)="selectAddress(addressList)"
-           [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}"><span>{{addressList.properties.label}}</span>
-       </li>
+        <li (click)="selectAddress(addressList)"
+            [ngStyle]="{ 'background-color': isOdd ? '#fafafa' : '#f0f0f0'}">
+          <span>{{ addressList.properties.label }}</span>
+        </li>
       }
     </ul>
   `,
@@ -61,13 +56,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     }
     `
   ,
-  providers: [
-    HttpClient,
-    Service
-  ],
 })
-export class AddressSearchComponent implements OnInit, OnDestroy {
-  protected service: Service = inject(Service);
+export class AddressSearchComponent {
+  protected service: AddressService = inject(AddressService);
 
   // data store containers
   protected selectedAddress$: BehaviorSubject<AddressAPIResult> = new BehaviorSubject({} as AddressAPIResult);
@@ -81,29 +72,24 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
   protected inputValue: BehaviorSubject<string> = new BehaviorSubject("");
 
   // components API
-  @Input() loaderSize = 15;
-  @Input() width = 250;
-  @Input() placeholder = '';
-  @Input() label = '';
-  @Input() id = 'ngx-address-search-component-' + (new Date()).getTime();
-  @Input() uri: string = '';
+  loaderSize = input('15');
+  width = input('250');
+  placeholder = input('');
+  label = input('');
+  id = input('ngx-address-search-component-' + (new Date()).getTime());
+  uri = input('');
   @Output() isLoading: ReplaySubject<boolean> = new ReplaySubject(1);
   @Output() addressFound: Observable<AddressAPIResult> = this.selectedAddress$.asObservable().pipe(
     filter((value: any) => value && typeof value === 'object' && value.type !== 'undefined')
   );
 
-  // Memory leak prevention
-  protected ngUnsubscribe: Subject<void> = new Subject();
-
-  ngOnInit(): void {
-    if (this.uri) {
-      this.service.uri = this.uri;
-    }
+  constructor() {
+    effect(() => this.service.uri = this.uri())
 
     this.isLoading.next(false);
 
     this.inputValue.asObservable().pipe(
-      takeUntil(this.ngUnsubscribe),
+      takeUntilDestroyed(),
       debounceTime(250),
       filter((value: string) => value.trim().length > 3),
       filter((value: string) =>
@@ -115,7 +101,7 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
     );
 
     this.inputValue.asObservable().pipe(
-      takeUntil(this.ngUnsubscribe),
+      takeUntilDestroyed(),
       debounceTime(750),
       filter((value: string) => value.trim().length > 3),
       filter((value: string) =>
@@ -127,12 +113,6 @@ export class AddressSearchComponent implements OnInit, OnDestroy {
       this.listAddresses$.next(data);
       this.isLoading.next(false);
     });
-  }
-
-  // clean memory
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 
   onKeyUp(event: Event): void {

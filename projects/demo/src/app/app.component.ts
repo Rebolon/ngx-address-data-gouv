@@ -1,14 +1,21 @@
-import { Component, computed, inject, signal, WritableSignal } from '@angular/core';
-import { AddressSearchComponent } from '@rebolon/ngx-address-data-gouv-search';
-import { AddressAPIResult } from 'dist/ngx-address-data-gouv-search/lib/ngx-address-data-gouv';
+import { Component, computed, signal, WritableSignal } from '@angular/core';
+import { AddressSearchComponent } from "../../../ngx-address-data-gouv-search/src/lib/ngx-address-data-gouv.component";
+import { AddressAPIResult } from "../../../ngx-address-data-gouv-search/src/lib/ngx-address-data-gouv";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [ AddressSearchComponent ],
   template: `
-    <h1>Fill the input to search a french postal adress:</h1>
-    <ngx-address-data-gouv-search (addressFound)="setAddress($event)"></ngx-address-data-gouv-search>
+    <h1>Fill the input to search a french postal address:</h1>
+    <ngx-address-data-gouv-search
+      (addressFound)="setAddress($event)"
+      id="id-of-component"
+      width="250"
+      placeholder="placehoder of the component"
+      label="label of the component"
+      loaderSize="15"
+    ></ngx-address-data-gouv-search>
     <pre><code>{{dumpAddress()}}</code></pre>
   `,
 })
