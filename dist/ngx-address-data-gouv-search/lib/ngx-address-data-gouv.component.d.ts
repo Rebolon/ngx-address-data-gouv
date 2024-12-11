@@ -1,10 +1,9 @@
-import { OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
-import { Service } from './ngx-address-data-gouv.service';
+import { AddressService } from './ngx-address-data-gouv.service';
 import { AddressAPIResult } from './ngx-address-data-gouv';
 import * as i0 from "@angular/core";
-export declare class AddressSearchComponent implements OnDestroy {
-    protected service: Service;
+export declare class AddressSearchComponent {
+    protected service: AddressService;
     protected selectedAddress$: BehaviorSubject<AddressAPIResult>;
     protected listAddresses$: Subject<AddressAPIResult[]>;
     listAddresses: Observable<AddressAPIResult[]>;
@@ -18,9 +17,7 @@ export declare class AddressSearchComponent implements OnDestroy {
     uri: import("@angular/core").InputSignal<string>;
     isLoading: ReplaySubject<boolean>;
     addressFound: Observable<AddressAPIResult>;
-    protected ngUnsubscribe: Subject<void>;
     constructor();
-    ngOnDestroy(): void;
     onKeyUp(event: Event): void;
     selectAddress(address: AddressAPIResult): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<AddressSearchComponent, never>;
