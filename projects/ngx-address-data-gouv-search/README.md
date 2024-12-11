@@ -8,14 +8,15 @@ You may also import the library to use the component inside your angular project
 
 ## Usage
 
-`npm install @rebolon/ngx-address-data-gouv`
+`npm install @rebolon/ngx-address-data-gouv-search
 
 ### Html or any web applications
 
 You only need to require the javascript files in your html template like this:
 
 ```
-<script src="node_modules/ngx-address-data-gouv/dist/app/output.js" type="module"></script>
+<script src="node_modules/@rebolon/ngx-address-data-gouv-search/dist/dist/js/polyfills.js" type="module"></script>
+<script src="node_modules/@rebolon/ngx-address-data-gouv-search/dist/dist/js/main.js" type="module"></script>
 ```
 
 ### Angular application

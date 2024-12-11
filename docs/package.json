@@ -1,9 +1,10 @@
 {
   "name": "@rebolon/ngx-address-data-gouv-search",
-  "version": "0.0.11",
+  "version": "0.0.10",
   "author": "Rebolon",
   "description": "A simple angular component to find French address from https://adresse.data.gouv.fr/api-doc",
   "repository": "https://github.com/Rebolon/ng-address-data-gouv",
   "homepage": "https://rebolon.github.io/ng-address-data-gouv/",
-  "licence": "MIT license"
+  "licence": "MIT license",
+  "private": false
 }

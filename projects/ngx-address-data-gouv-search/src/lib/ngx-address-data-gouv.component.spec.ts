@@ -1,13 +1,11 @@
+import { mock } from "../mocks/address";
+import { provideHttpClient } from "@angular/common/http";
+import { ComponentRef } from "@angular/core";
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from "@angular/platform-browser";
+import { of } from "rxjs";
 import { AddressSearchComponent } from './ngx-address-data-gouv.component';
-import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { AddressService } from "./ngx-address-data-gouv.service";
-import {provideHttpClient} from "@angular/common/http";
-import {AddressAPIProperties, AddressAPIResult} from "./ngx-address-data-gouv";
-import {Observable, of} from "rxjs";
-import {mock} from "./mock.service";
-import {ComponentRef, input} from "@angular/core";
-import {By} from "@angular/platform-browser";
 
 describe('AddressSearchComponent', () => {
   let component: AddressSearchComponent;

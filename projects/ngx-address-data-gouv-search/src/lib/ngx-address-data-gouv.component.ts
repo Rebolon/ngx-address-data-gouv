@@ -7,15 +7,14 @@ import {HttpClient} from '@angular/common/http';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: 'ngx-address-data-gouv-search',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgStyle, AsyncPipe, CommonModule,],
-  providers: [
-    HttpClient,
-    AddressService
-  ],
-  template: `
+    selector: 'ngx-address-data-gouv-search',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgStyle, AsyncPipe, CommonModule,],
+    providers: [
+        HttpClient,
+        AddressService
+    ],
+    template: `
     @if (id()) {
       <label for="{{id()}}">{{ label() }}</label>
     }
@@ -35,27 +34,27 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
       }
     </ul>
   `,
-  styles:
+    styles: `
+    :host {
+      input {
+          border: 0.2px solid #ccc;
+      }
+
+      ul {
+          padding-inline-start: 0px;
+          margin-block-start: 0em;
+      }
+
+      li {
+          list-style-type: none;
+          cursor: pointer;
+      }
+
+      li:hover {
+          padding-left: 5px;
+      }
+    }
     `
-    input {
-        border: 0.2px solid #ccc;
-    }
-
-    ul {
-        padding-inline-start: 0px;
-        margin-block-start: 0em;
-    }
-
-    li {
-        list-style-type: none;
-        cursor: pointer;
-    }
-
-    li:hover {
-        padding-left: 5px;
-    }
-    `
-  ,
 })
 export class AddressSearchComponent {
   protected service: AddressService = inject(AddressService);

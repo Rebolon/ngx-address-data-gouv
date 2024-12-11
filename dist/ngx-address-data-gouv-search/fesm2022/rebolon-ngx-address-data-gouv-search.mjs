@@ -1,12 +1,17 @@
-import * as i1 from '@angular/common/http';
-import { HttpParams, HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import * as i0 from '@angular/core';
-import { Injectable, inject, input, effect, Component, Output } from '@angular/core';
-import { EMPTY, map, shareReplay, BehaviorSubject, Subject, filter, ReplaySubject, takeUntil, debounceTime, switchMap } from 'rxjs';
+import { inject, Injectable, input, effect, Component, ChangeDetectionStrategy, Output } from '@angular/core';
+import { EMPTY, map, BehaviorSubject, Subject, filter, ReplaySubject, debounceTime, switchMap } from 'rxjs';
 import { NgStyle, AsyncPipe, CommonModule } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-class Service {
-    #uri = 'https://api-adresse.data.gouv.fr';
+const environment = {
+    baseUrl: 'https://api-adresse.data.gouv.fr'
+};
+
+class AddressService {
+    #uri = environment.baseUrl;
+    #api = inject(HttpClient);
     /**
      * Allow to change the uri if you host your own addressDataGouv service
      */
@@ -19,10 +24,7 @@ class Service {
     get urlSearch() {
         return `${this.#uri}/search/`;
     }
-    constructor(api) {
-        this.api = api;
-    }
-    get(loadOptions) {
+    #get(loadOptions) {
         const options = {
             params: new HttpParams().set('autocomplete', '0').set('limit', '5'),
             headers: new HttpHeaders().set('Accept', 'application/json'),
@@ -39,26 +41,26 @@ class Service {
         else {
             return EMPTY;
         }
-        return this.api
-            .request('GET', this.urlSearch, options)
-            .pipe(map((data) => data.features), shareReplay(1));
+        return this.#api
+            .get(this.urlSearch, options)
+            .pipe(map((data) => data.features));
     }
     search(text, limit = 5, type = 'housenumber', autocomplete = 0) {
-        return this.get({ q: text, limit, type, autocomplete });
+        return this.#get({ q: text, limit, type, autocomplete });
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: Service, deps: [{ token: i1.HttpClient }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: Service, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: AddressService, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: AddressService, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: Service, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: AddressService, decorators: [{
             type: Injectable,
             args: [{
                     providedIn: 'root'
                 }]
-        }], ctorParameters: () => [{ type: i1.HttpClient }] });
+        }] });
 
 class AddressSearchComponent {
     constructor() {
-        this.service = inject(Service);
+        this.service = inject(AddressService);
         // data store containers
         this.selectedAddress$ = new BehaviorSubject({});
         this.listAddresses$ = new Subject();
@@ -77,22 +79,15 @@ class AddressSearchComponent {
         this.uri = input('');
         this.isLoading = new ReplaySubject(1);
         this.addressFound = this.selectedAddress$.asObservable().pipe(filter((value) => value && typeof value === 'object' && value.type !== 'undefined'));
-        // Memory leak prevention
-        this.ngUnsubscribe = new Subject();
         effect(() => this.service.uri = this.uri());
         this.isLoading.next(false);
-        this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe), debounceTime(250), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
+        this.inputValue.asObservable().pipe(takeUntilDestroyed(), debounceTime(250), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
             || value !== this.selectedAddress$.getValue().properties.label)).subscribe(() => this.isLoading.next(true));
-        this.inputValue.asObservable().pipe(takeUntil(this.ngUnsubscribe), debounceTime(750), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
+        this.inputValue.asObservable().pipe(takeUntilDestroyed(), debounceTime(750), filter((value) => value.trim().length > 3), filter((value) => !this.selectedAddress$.getValue().properties
             || value !== this.selectedAddress$.getValue().properties.label), switchMap((data) => this.service.search(data))).subscribe((data) => {
             this.listAddresses$.next(data);
             this.isLoading.next(false);
         });
-    }
-    // clean memory
-    ngOnDestroy() {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
     }
     onKeyUp(event) {
         const value = event.currentTarget.value;
@@ -111,10 +106,10 @@ class AddressSearchComponent {
         // change value of the input
         this.inputValue.next(address.properties.label);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: AddressSearchComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
-    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.0.0-next.8", type: AddressSearchComponent, isStandalone: true, selector: "ngx-address-data-gouv-search", inputs: { loaderSize: { classPropertyName: "loaderSize", publicName: "loaderSize", isSignal: true, isRequired: false, transformFunction: null }, width: { classPropertyName: "width", publicName: "width", isSignal: true, isRequired: false, transformFunction: null }, placeholder: { classPropertyName: "placeholder", publicName: "placeholder", isSignal: true, isRequired: false, transformFunction: null }, label: { classPropertyName: "label", publicName: "label", isSignal: true, isRequired: false, transformFunction: null }, id: { classPropertyName: "id", publicName: "id", isSignal: true, isRequired: false, transformFunction: null }, uri: { classPropertyName: "uri", publicName: "uri", isSignal: true, isRequired: false, transformFunction: null } }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: AddressSearchComponent, deps: [], target: i0.ɵɵFactoryTarget.Component }); }
+    static { this.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "17.0.0", version: "19.0.3", type: AddressSearchComponent, isStandalone: true, selector: "ngx-address-data-gouv-search", inputs: { loaderSize: { classPropertyName: "loaderSize", publicName: "loaderSize", isSignal: true, isRequired: false, transformFunction: null }, width: { classPropertyName: "width", publicName: "width", isSignal: true, isRequired: false, transformFunction: null }, placeholder: { classPropertyName: "placeholder", publicName: "placeholder", isSignal: true, isRequired: false, transformFunction: null }, label: { classPropertyName: "label", publicName: "label", isSignal: true, isRequired: false, transformFunction: null }, id: { classPropertyName: "id", publicName: "id", isSignal: true, isRequired: false, transformFunction: null }, uri: { classPropertyName: "uri", publicName: "uri", isSignal: true, isRequired: false, transformFunction: null } }, outputs: { isLoading: "isLoading", addressFound: "addressFound" }, providers: [
             HttpClient,
-            Service
+            AddressService
         ], ngImport: i0, template: `
     @if (id()) {
       <label for="{{id()}}">{{ label() }}</label>
@@ -134,11 +129,14 @@ class AddressSearchComponent {
         </li>
       }
     </ul>
-  `, isInline: true, styles: ["input{border:.2px solid #ccc}ul{padding-inline-start:0px;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "pipe", type: AsyncPipe, name: "async" }, { kind: "ngmodule", type: CommonModule }] }); }
+  `, isInline: true, styles: [":host input{border:.2px solid #ccc}:host ul{padding-inline-start:0px;margin-block-start:0em}:host li{list-style-type:none;cursor:pointer}:host li:hover{padding-left:5px}\n"], dependencies: [{ kind: "directive", type: NgStyle, selector: "[ngStyle]", inputs: ["ngStyle"] }, { kind: "pipe", type: AsyncPipe, name: "async" }, { kind: "ngmodule", type: CommonModule }], changeDetection: i0.ChangeDetectionStrategy.OnPush }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.8", ngImport: i0, type: AddressSearchComponent, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: AddressSearchComponent, decorators: [{
             type: Component,
-            args: [{ standalone: true, imports: [NgStyle, AsyncPipe, CommonModule,], selector: 'ngx-address-data-gouv-search', template: `
+            args: [{ selector: 'ngx-address-data-gouv-search', changeDetection: ChangeDetectionStrategy.OnPush, imports: [NgStyle, AsyncPipe, CommonModule,], providers: [
+                        HttpClient,
+                        AddressService
+                    ], template: `
     @if (id()) {
       <label for="{{id()}}">{{ label() }}</label>
     }
@@ -157,10 +155,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.8", 
         </li>
       }
     </ul>
-  `, providers: [
-                        HttpClient,
-                        Service
-                    ], styles: ["input{border:.2px solid #ccc}ul{padding-inline-start:0px;margin-block-start:0em}li{list-style-type:none;cursor:pointer}li:hover{padding-left:5px}\n"] }]
+  `, styles: [":host input{border:.2px solid #ccc}:host ul{padding-inline-start:0px;margin-block-start:0em}:host li{list-style-type:none;cursor:pointer}:host li:hover{padding-left:5px}\n"] }]
         }], ctorParameters: () => [], propDecorators: { isLoading: [{
                 type: Output
             }], addressFound: [{
@@ -175,5 +170,5 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.0-next.8", 
  * Generated bundle index. Do not edit.
  */
 
-export { AddressSearchComponent, Service };
+export { AddressSearchComponent, AddressService };
 //# sourceMappingURL=rebolon-ngx-address-data-gouv-search.mjs.map

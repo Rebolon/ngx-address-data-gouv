@@ -62,14 +62,14 @@
 
     <h3>Html or any web applications</h3>
 
-    <p>This is the web-components usage: you only need to require the javascript files in your html template like this:</p>
+    <p>This is the web-components usage: you only need to require the javascript files from 'node_modules/@rebolon/ngx-address-data-gouv-search/web-components/'' in your html template like this:</p>
 
     <div class="highlighter-rouge">
       <div class="highlight">
         <pre class="highlight">
           <code>
-            &lt;script src="node_modules/ngx-address-data-gouv-search/docs/assets/js/polyfills.js" type="module"&gt;&lt;/script&gt;
-            &lt;script src="node_modules/ngx-address-data-gouv-search/docs/assets/js/main.js" type="module"&gt;&lt;/script&gt;
+            &lt;script src="assets/js/polyfills.js" type="module"&gt;&lt;/script&gt;
+            &lt;script src="assets/js/main.js" type="module"&gt;&lt;/script&gt;
           </code>
         </pre>
       </div>
@@ -83,7 +83,7 @@
       <div class="highlight">
         <pre class="highlight">
           <code>
-            import {AddressSearchComponent} from '@rebolon/ngx-address-data-gouv-search/dist/lib/';
+            import {AddressSearchComponent} from '@rebolon/ngx-address-data-gouv-search/ngx-address-data-gouv-search/';
             ...
             @NgModule OR @Component({
               imports: [
